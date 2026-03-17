@@ -1,0 +1,365 @@
+[
+    {
+        "id": 100,
+        "title": "1984",
+        "publication_year": 1949,
+        "authorId": 46,
+        "author": {
+            "id": 46,
+            "firstname": "George",
+            "lastname": "Orwell"
+        }
+    },
+    {
+        "id": 132,
+        "title": "1Q84",
+        "publication_year": 2009,
+        "authorId": 60,
+        "author": {
+            "id": 60,
+            "firstname": "Haruki",
+            "lastname": "Murakami"
+        }
+    },
+    {
+        "id": 112,
+        "title": "2001: A Space Odyssey",
+        "publication_year": 1968,
+        "authorId": 51,
+        "author": {
+            "id": 51,
+            "firstname": "Arthur C.",
+            "lastname": "Clarke"
+        }
+    },
+    {
+        "id": 108,
+        "title": "And Then There Were None",
+        "publication_year": 1939,
+        "authorId": 49,
+        "author": {
+            "id": 49,
+            "firstname": "Agatha",
+            "lastname": "Christie"
+        }
+    },
+    {
+        "id": 101,
+        "title": "Animal Farm",
+        "publication_year": 1945,
+        "authorId": 46,
+        "author": {
+            "id": 46,
+            "firstname": "George",
+            "lastname": "Orwell"
+        }
+    },
+    {
+        "id": 119,
+        "title": "Anna Karenina",
+        "publication_year": 1877,
+        "authorId": 54,
+        "author": {
+            "id": 54,
+            "firstname": "Leo",
+            "lastname": "Tolstoy"
+        }
+    },
+    {
+        "id": 111,
+        "title": "Around the World in Eighty Days",
+        "publication_year": 1872,
+        "authorId": 50,
+        "author": {
+            "id": 50,
+            "firstname": "Jules",
+            "lastname": "Verne"
+        }
+    },
+    {
+        "id": 123,
+        "title": "Billy Budd",
+        "publication_year": 1924,
+        "authorId": 56,
+        "author": {
+            "id": 56,
+            "firstname": "Herman",
+            "lastname": "Melville"
+        }
+    },
+    {
+        "id": 113,
+        "title": "Childhood’s End",
+        "publication_year": 1953,
+        "authorId": 51,
+        "author": {
+            "id": 51,
+            "firstname": "Arthur C.",
+            "lastname": "Clarke"
+        }
+    },
+    {
+        "id": 120,
+        "title": "Crime and Punishment",
+        "publication_year": 1866,
+        "authorId": 55,
+        "author": {
+            "id": 55,
+            "firstname": "Fyodor",
+            "lastname": "Dostoevsky"
+        }
+    },
+    {
+        "id": 114,
+        "title": "Do Androids Dream of Electric Sheep?",
+        "publication_year": 1968,
+        "authorId": 52,
+        "author": {
+            "id": 52,
+            "firstname": "Philip K.",
+            "lastname": "Dick"
+        }
+    },
+    {
+        "id": 116,
+        "title": "Fahrenheit 451",
+        "publication_year": 1953,
+        "authorId": 53,
+        "author": {
+            "id": 53,
+            "firstname": "Ray",
+            "lastname": "Bradbury"
+        }
+    },
+    {
+        "id": 104,
+        "title": "Foundation",
+        "publication_year": 1951,
+        "authorId": 48,
+        "author": {
+            "id": 48,
+            "firstname": "Isaac",
+            "lastname": "Asimov"
+        }
+    },
+    {
+        "id": 102,
+        "title": "Frankenstein",
+        "publication_year": 1818,
+        "authorId": 47,
+        "author": {
+            "id": 47,
+            "firstname": "Mary",
+            "lastname": "Shelley"
+        }
+    },
+    {
+        "id": 105,
+        "title": "I, Robot",
+        "publication_year": 1950,
+        "authorId": 48,
+        "author": {
+            "id": 48,
+            "firstname": "Isaac",
+            "lastname": "Asimov"
+        }
+    },
+    {
+        "id": 110,
+        "title": "Journey to the Center of the Earth",
+        "publication_year": 1864,
+        "authorId": 50,
+        "author": {
+            "id": 50,
+            "firstname": "Jules",
+            "lastname": "Verne"
+        }
+    },
+    {
+        "id": 130,
+        "title": "Kafka on the Shore",
+        "publication_year": 2002,
+        "authorId": 60,
+        "author": {
+            "id": 60,
+            "firstname": "Haruki",
+            "lastname": "Murakami"
+        }
+    },
+    {
+        "id": 129,
+        "title": "Love in the Time of Cholera",
+        "publication_year": 1985,
+        "authorId": 59,
+        "author": {
+            "id": 59,
+            "firstname": "Gabriel",
+            "lastname": "García Márquez"
+        }
+    },
+    {
+        "id": 122,
+        "title": "Moby-Dick",
+        "publication_year": 1851,
+        "authorId": 56,
+        "author": {
+            "id": 56,
+            "firstname": "Herman",
+            "lastname": "Melville"
+        }
+    },
+    {
+        "id": 124,
+        "title": "Mrs Dalloway",
+        "publication_year": 1925,
+        "authorId": 57,
+        "author": {
+            "id": 57,
+            "firstname": "Virginia",
+            "lastname": "Woolf"
+        }
+    },
+    {
+        "id": 107,
+        "title": "Murder on the Orient Express",
+        "publication_year": 1934,
+        "authorId": 49,
+        "author": {
+            "id": 49,
+            "firstname": "Agatha",
+            "lastname": "Christie"
+        }
+    },
+    {
+        "id": 131,
+        "title": "Norwegian Wood",
+        "publication_year": 1987,
+        "authorId": 60,
+        "author": {
+            "id": 60,
+            "firstname": "Haruki",
+            "lastname": "Murakami"
+        }
+    },
+    {
+        "id": 128,
+        "title": "One Hundred Years of Solitude",
+        "publication_year": 1967,
+        "authorId": 59,
+        "author": {
+            "id": 59,
+            "firstname": "Gabriel",
+            "lastname": "García Márquez"
+        }
+    },
+    {
+        "id": 121,
+        "title": "The Brothers Karamazov",
+        "publication_year": 1880,
+        "authorId": 55,
+        "author": {
+            "id": 55,
+            "firstname": "Fyodor",
+            "lastname": "Dostoevsky"
+        }
+    },
+    {
+        "id": 106,
+        "title": "The Caves of Steel",
+        "publication_year": 1953,
+        "authorId": 48,
+        "author": {
+            "id": 48,
+            "firstname": "Isaac",
+            "lastname": "Asimov"
+        }
+    },
+    {
+        "id": 103,
+        "title": "The Last Man",
+        "publication_year": 1826,
+        "authorId": 47,
+        "author": {
+            "id": 47,
+            "firstname": "Mary",
+            "lastname": "Shelley"
+        }
+    },
+    {
+        "id": 115,
+        "title": "The Man in the High Castle",
+        "publication_year": 1962,
+        "authorId": 52,
+        "author": {
+            "id": 52,
+            "firstname": "Philip K.",
+            "lastname": "Dick"
+        }
+    },
+    {
+        "id": 117,
+        "title": "The Martian Chronicles",
+        "publication_year": 1950,
+        "authorId": 53,
+        "author": {
+            "id": 53,
+            "firstname": "Ray",
+            "lastname": "Bradbury"
+        }
+    },
+    {
+        "id": 126,
+        "title": "The Metamorphosis",
+        "publication_year": 1915,
+        "authorId": 58,
+        "author": {
+            "id": 58,
+            "firstname": "Franz",
+            "lastname": "Kafka"
+        }
+    },
+    {
+        "id": 127,
+        "title": "The Trial",
+        "publication_year": 1925,
+        "authorId": 58,
+        "author": {
+            "id": 58,
+            "firstname": "Franz",
+            "lastname": "Kafka"
+        }
+    },
+    {
+        "id": 125,
+        "title": "To the Lighthouse",
+        "publication_year": 1927,
+        "authorId": 57,
+        "author": {
+            "id": 57,
+            "firstname": "Virginia",
+            "lastname": "Woolf"
+        }
+    },
+    {
+        "id": 109,
+        "title": "Twenty Thousand Leagues Under the Sea",
+        "publication_year": 1870,
+        "authorId": 50,
+        "author": {
+            "id": 50,
+            "firstname": "Jules",
+            "lastname": "Verne"
+        }
+    },
+    {
+        "id": 118,
+        "title": "War and Peace",
+        "publication_year": 1869,
+        "authorId": 54,
+        "author": {
+            "id": 54,
+            "firstname": "Leo",
+            "lastname": "Tolstoy"
+        }
+    }
+]
