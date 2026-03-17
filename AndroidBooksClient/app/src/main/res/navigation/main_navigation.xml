@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_navigation"
+    app:startDestination="@id/bookList">
+
+    <fragment
+        android:id="@+id/authorList"
+        android:name="p42.androidbooksclient.view.AuthorList"
+        android:label="fragment_author_list"
+        tools:layout="@layout/fragment_author_list" >
+    </fragment>
+    <fragment
+        android:id="@+id/bookList"
+        android:name="p42.androidbooksclient.view.BookList"
+        android:label="fragment_book_list"
+        tools:layout="@layout/fragment_book_list" >
+    </fragment>
+</navigation>
