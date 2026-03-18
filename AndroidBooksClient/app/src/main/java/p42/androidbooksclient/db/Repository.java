@@ -7,6 +7,7 @@ import java.util.List;
 import okhttp3.ResponseBody;
 import p42.androidbooksclient.model.Author;
 import p42.androidbooksclient.model.Book;
+import p42.androidbooksclient.model.Tag;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -16,6 +17,7 @@ public class Repository {
     private static final String API_URL = "http://localhost:3000";
     private AuthorService authorService;
     private BookService bookService;
+    private TagService tagService;
     private Retrofit retrofit;
 
     public Repository(){
@@ -25,6 +27,7 @@ public class Repository {
 
         authorService = retrofit.create(AuthorService.class);
         bookService = retrofit.create(BookService.class);
+        tagService = retrofit.create(TagService.class);
     }
 
     // ================== AUTHORS ======================
@@ -157,4 +160,59 @@ public class Repository {
     }
 
     // ================== TAGS ======================
+    public void getAllTags(MutableLiveData<List<Tag>> foundTags){
+        tagService.getTags().enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+            }
+        });
+    }
+
+    public void getTagsOfBook(MutableLiveData<Tag> foundTag, String bookID){
+        tagService.getTagsOfBook(bookID).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+            }
+        });
+    }
+
+    public void associateTagToBook(MutableLiveData<Book> associatedBook, String bookID, String tagID){
+        tagService.associateTagToBook(bookID, tagID).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+            }
+        });
+    }
+
+    public void dissociateTagToBook(MutableLiveData<Book> dissociateBook, String bookID, String tagID){
+        tagService.dissociateTagToBook(bookID, tagID).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+            }
+        });
+    }
 }
