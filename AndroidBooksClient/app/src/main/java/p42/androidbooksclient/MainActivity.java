@@ -1,12 +1,22 @@
 package p42.androidbooksclient;
 
 import android.os.Bundle;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.lifecycle.MutableLiveData;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import p42.androidbooksclient.db.Repository;
+import p42.androidbooksclient.model.Author;
+import p42.androidbooksclient.model.Book;
+import p42.androidbooksclient.model.Tag;
 
 public class MainActivity extends AppCompatActivity {
     public MainActivity(){
