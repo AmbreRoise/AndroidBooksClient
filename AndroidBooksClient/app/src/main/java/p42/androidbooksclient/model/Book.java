@@ -1,6 +1,7 @@
 package p42.androidbooksclient.model;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Book {
     private Integer _id = null;
@@ -50,6 +51,10 @@ public class Book {
 
     public ArrayList<Tag> getTags(){
         return this._tags;
+    }
+
+    public void setTags(List<Tag> tags){
+        this._tags = new ArrayList<>(tags);
     }
 
     public void addTag(Tag tag){

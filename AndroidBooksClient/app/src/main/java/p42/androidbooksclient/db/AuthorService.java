@@ -8,15 +8,15 @@ import retrofit2.http.POST;
 import retrofit2.http.Path;
 
 public interface AuthorService {
-    @GET("/authors")
+    @GET("authors")
     Call<ResponseBody> getAuthors();
 
-    @POST("/authors")
+    @POST("authors")
     Call<ResponseBody> createAuthor();
 
-    @GET("/authors/{id}")
+    @GET("authors/{id}")
     Call<ResponseBody> getOneAuthor(@Path("id") String authorID);
 
-    @DELETE("/authors/{id}")
+    @DELETE("authors/{id}")
     Call<ResponseBody> deleteOneAuthor(@Path("id") String authorID);
 }

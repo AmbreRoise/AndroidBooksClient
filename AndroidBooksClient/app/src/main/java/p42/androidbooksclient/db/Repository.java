@@ -1,7 +1,15 @@
 package p42.androidbooksclient.db;
 
+import android.util.Log;
+
 import androidx.lifecycle.MutableLiveData;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import okhttp3.ResponseBody;
@@ -14,7 +22,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 
 public class Repository {
-    private static final String API_URL = "http://localhost:3000";
+    private static final String API_URL = "http://127.0.0.1:3000/";
     private AuthorService authorService;
     private BookService bookService;
     private TagService tagService;
@@ -36,12 +44,37 @@ public class Repository {
         authorService.getAuthors().enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if(response.isSuccessful()){
+                    try{
+                        JSONArray json = new JSONArray(response.body().string());
+                        List<Author> authors = new ArrayList<>();
 
+                        for(int i=0; i<json.length(); i++){
+                            JSONObject jsonObject = json.getJSONObject(i);
+                            Author author = new Author(
+                                jsonObject.getInt("id"),
+                                jsonObject.getString("firstname"),
+                                jsonObject.getString("lastname")
+                            );
+                            authors.add(author);
+                        }
+
+                        foundAuthors.setValue(authors);
+                    }
+                    catch (JSONException | IOException exception){
+                        try {
+                            Log.d("Authors request", response.body().string());
+                        } catch (IOException e) {
+                            throw new RuntimeException(e);
+                        }
+                        Log.d("Author request", exception.getMessage());
+                    }
+                }
             }
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-
+                Log.d("Repository", "Retrofit error on getAllAuthors(data)");
             }
         });
     }
@@ -50,12 +83,31 @@ public class Repository {
         authorService.getOneAuthor(authorID).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-
+                if(response.isSuccessful()){
+                    try{
+                        JSONObject json = new JSONObject(response.body().string());
+                        Author author = new Author(
+                                json.getInt("id"),
+                                json.getString("firstname"),
+                                json.getString("lastname")
+                        );
+                        foundAuthor.setValue(author);
+                    }
+                    catch (JSONException | IOException exception){
+                        try {
+                            Log.d("Author request", response.body().string());
+                        } catch (IOException e) {
+                            throw new RuntimeException(e);
+                        }
+                        Log.d("Author request", exception.getMessage());
+                    }
+                }
             }
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-
+                Log.e("Repository", "Retrofit error on getOneAuthor: " + t.getMessage());
+                Log.e("Repository", "Cause: " + t.getCause());
             }
         });
     }
@@ -93,12 +145,37 @@ public class Repository {
         bookService.getBooks().enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if(response.isSuccessful()){
+                    try{
+                        JSONArray json = new JSONArray(response.body().string());
+                        List<Book> books = new ArrayList<>();
 
+                        for(int i=0; i<json.length(); i++){
+                            JSONObject jsonObject = json.getJSONObject(i);
+                            Book book = new Book(
+                                    jsonObject.getInt("id"),
+                                    jsonObject.getString("title"),
+                                    jsonObject.getInt("publication_year"),
+                                    jsonObject.getInt("authorId")
+                            );
+                            books.add(book);
+                        }
+                        foundBooks.setValue(books);
+                    }
+                    catch (JSONException | IOException exception){
+                        try {
+                            Log.d("Books request", response.body().string());
+                        } catch (IOException e) {
+                            throw new RuntimeException(e);
+                        }
+                        Log.d("Books request", exception.getMessage());
+                    }
+                }
             }
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-
+                Log.d("Repository", "Retrofit error on getAllBooks(data)");
             }
         });
     }
@@ -107,12 +184,32 @@ public class Repository {
         bookService.getOneBook(bookID).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if(response.isSuccessful()){
+                    try {
+                        JSONObject json = new JSONObject(response.body().string());
+                        Book book = new Book(
+                                json.getInt("id"),
+                                json.getString("title"),
+                                json.getInt("publication_year"),
+                                json.getInt("authorId")
+                        );
 
+                        getTagsOfBook(foundBook, book, bookID);
+                    }
+                    catch (JSONException | IOException exception){
+                        try {
+                            Log.d("Book request", response.body().string());
+                        } catch (IOException e) {
+                            throw new RuntimeException(e);
+                        }
+                        Log.d("Book request", exception.getMessage());
+                    }
+                }
             }
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-
+                Log.d("Repository", "Retrofit error on getOneBook(data, bookID)");
             }
         });
     }
@@ -135,12 +232,37 @@ public class Repository {
         bookService.getBooksOfAuthor(authorID).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if(response.isSuccessful()){
+                    try{
+                        JSONArray json = new JSONArray(response.body().string());
+                        List<Book> books = new ArrayList<>();
 
+                        for(int i=0; i<json.length(); i++){
+                            JSONObject jsonObject = json.getJSONObject(i);
+                            Book book = new Book(
+                                    jsonObject.getInt("id"),
+                                    jsonObject.getString("title"),
+                                    jsonObject.getInt("publication_year"),
+                                    jsonObject.getInt("authorId")
+                            );
+                            books.add(book);
+                        }
+                        foundBooks.setValue(books);
+                    }
+                    catch (JSONException | IOException exception){
+                        try {
+                            Log.d("Books of author request", response.body().string());
+                        } catch (IOException e) {
+                            throw new RuntimeException(e);
+                        }
+                        Log.d("Books of author request", exception.getMessage());
+                    }
+                }
             }
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-
+                Log.d("Repository", "Retrofit error on getBooksOfAuthor(data, authorID)");
             }
         });
     }
@@ -164,26 +286,74 @@ public class Repository {
         tagService.getTags().enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if(response.isSuccessful()){
+                    try{
+                        JSONArray json = new JSONArray(response.body().string());
+                        List<Tag> tags = new ArrayList<>();
 
+                        for(int i=0; i<json.length(); i++){
+                            JSONObject jsonObject = json.getJSONObject(i);
+                            Tag tag = new Tag(
+                                    jsonObject.getInt("id"),
+                                    jsonObject.getString("name")
+                            );
+                            tags.add(tag);
+                        }
+                        foundTags.setValue(tags);
+                    }
+                    catch (JSONException | IOException exception){
+                        try {
+                            Log.d("Tags request", response.body().string());
+                        } catch (IOException e) {
+                            throw new RuntimeException(e);
+                        }
+                        Log.d("Tags request", exception.getMessage());
+                    }
+                }
             }
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-
+                Log.d("Repository", "Retrofit error on getAllTags(data)");
             }
         });
     }
 
-    public void getTagsOfBook(MutableLiveData<Tag> foundTag, String bookID){
+    private void getTagsOfBook(MutableLiveData<Book> book, Book bookObj, String bookID){
         tagService.getTagsOfBook(bookID).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if(response.isSuccessful()){
+                    try{
+                        JSONArray json = new JSONArray(response.body().string());
+                        List<Tag> tags = new ArrayList<>();
 
+                        for(int i=0; i<json.length(); i++){
+                            JSONObject jsonObject = json.getJSONObject(i);
+                            Tag tag = new Tag(
+                                    jsonObject.getInt("id"),
+                                    jsonObject.getString("name")
+                            );
+                            tags.add(tag);
+                        }
+
+                        bookObj.setTags(tags);
+                        book.setValue(bookObj);
+                    }
+                    catch (JSONException | IOException exception){
+                        try {
+                            Log.d("Tags of book request", response.body().string());
+                        } catch (IOException e) {
+                            throw new RuntimeException(e);
+                        }
+                        Log.d("Tags of book request", exception.getMessage());
+                    }
+                }
             }
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-
+                Log.d("Repository", "Retrofit error on getTagsOfBook(data, bookID)");
             }
         });
     }
