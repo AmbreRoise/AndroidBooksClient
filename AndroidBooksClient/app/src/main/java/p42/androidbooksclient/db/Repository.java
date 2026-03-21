@@ -12,6 +12,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import okhttp3.MediaType;
+import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import p42.androidbooksclient.model.Author;
 import p42.androidbooksclient.model.Book;
@@ -61,20 +63,15 @@ public class Repository {
 
                         foundAuthors.setValue(authors);
                     }
-                    catch (JSONException | IOException exception){
-                        try {
-                            Log.d("Authors request", response.body().string());
-                        } catch (IOException e) {
-                            throw new RuntimeException(e);
-                        }
-                        Log.d("Author request", exception.getMessage());
+                    catch (JSONException | IOException e){
+                        Log.e("Retrofit", "getAllAuthors parse error : " + e.getMessage());
                     }
                 }
             }
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-                Log.d("Repository", "Retrofit error on getAllAuthors(data)");
+                Log.e("Repository", "Retrofit error on getAllAuthors : " + t.getMessage());
             }
         });
     }
@@ -93,40 +90,64 @@ public class Repository {
                         );
                         foundAuthor.setValue(author);
                     }
-                    catch (JSONException | IOException exception){
-                        try {
-                            Log.d("Author request", response.body().string());
-                        } catch (IOException e) {
-                            throw new RuntimeException(e);
-                        }
-                        Log.d("Author request", exception.getMessage());
+                    catch (JSONException | IOException e){
+                        Log.e("Retrofit", "getOneAuthor parse error : " + e.getMessage());
                     }
                 }
             }
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-                Log.e("Repository", "Retrofit error on getOneAuthor: " + t.getMessage());
-                Log.e("Repository", "Cause: " + t.getCause());
+                Log.e("Repository", "Retrofit error on getOneAuthor : " + t.getMessage());
             }
         });
     }
 
-    public void createAuthor(MutableLiveData<Author> createdAuthor){
-        authorService.createAuthor().enqueue(new Callback<ResponseBody>() {
+    public void createAuthor(MutableLiveData<Author> createdAuthor, String firstname, String lastname){
+        // Création du JSON pour le body de la Request
+        JSONObject jsonObject = new JSONObject();
+        try{
+            jsonObject.put("firstname", firstname);
+            jsonObject.put("lastname", lastname);
+        }
+        catch (JSONException e){
+            Log.e("Repository", "createAuthor JSON error : " + e.getMessage());
+            return;
+        }
+
+        RequestBody body = RequestBody.create(
+                jsonObject.toString(),
+                MediaType.parse("application/json")
+        );
+
+        authorService.createAuthor(body).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if(response.isSuccessful()){
+                    try {
+                        JSONObject json = new JSONObject(response.body().string());
+                        Author author = new Author(
+                                json.getInt("id"),
+                                json.getString("firstname"),
+                                json.getString("lastname")
+                        );
 
+                        createdAuthor.setValue(author);
+                    }
+                    catch(JSONException | IOException e){
+                        Log.e("Repository", "createAuthor parse error : " + e.getMessage());
+                    }
+                }
             }
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-
+                Log.e("Repository", "Retrofit error on createAuthor : " + t.getMessage());
             }
         });
     }
 
-    public void deleteAuthor(MutableLiveData<Author> deletedAuthor, String authorID){
+    public void deleteAuthor(String authorID){
         authorService.deleteOneAuthor(authorID).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -135,7 +156,7 @@ public class Repository {
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-
+                Log.e("Repository", "Retrofit error on deleteAuthor : " + t.getMessage());
             }
         });
     }
@@ -162,20 +183,15 @@ public class Repository {
                         }
                         foundBooks.setValue(books);
                     }
-                    catch (JSONException | IOException exception){
-                        try {
-                            Log.d("Books request", response.body().string());
-                        } catch (IOException e) {
-                            throw new RuntimeException(e);
-                        }
-                        Log.d("Books request", exception.getMessage());
+                    catch (JSONException | IOException e){
+                        Log.e("Retrofit", "getAllBooks parse error : " + e.getMessage());
                     }
                 }
             }
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-                Log.d("Repository", "Retrofit error on getAllBooks(data)");
+                Log.e("Repository", "Retrofit error on getAllBooks : " + t.getMessage());
             }
         });
     }
@@ -196,25 +212,20 @@ public class Repository {
 
                         getTagsOfBook(foundBook, book, bookID);
                     }
-                    catch (JSONException | IOException exception){
-                        try {
-                            Log.d("Book request", response.body().string());
-                        } catch (IOException e) {
-                            throw new RuntimeException(e);
-                        }
-                        Log.d("Book request", exception.getMessage());
+                    catch (JSONException | IOException e) {
+                        Log.e("Retrofit", "getOneBook parse error : " + e.getMessage());
                     }
                 }
             }
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-                Log.d("Repository", "Retrofit error on getOneBook(data, bookID)");
+                Log.e("Repository", "Retrofit error on getOneBook : " + t.getMessage());
             }
         });
     }
 
-    public void deleteBook(MutableLiveData<Book> deletedBook, String bookID){
+    public void deleteBook(String bookID){
         bookService.deleteOneBook(bookID).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -223,7 +234,7 @@ public class Repository {
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-
+                Log.e("Repository", "Retrofit error on deleteBook : " + t.getMessage());
             }
         });
     }
@@ -249,34 +260,72 @@ public class Repository {
                         }
                         foundBooks.setValue(books);
                     }
-                    catch (JSONException | IOException exception){
-                        try {
-                            Log.d("Books of author request", response.body().string());
-                        } catch (IOException e) {
-                            throw new RuntimeException(e);
-                        }
-                        Log.d("Books of author request", exception.getMessage());
+                    catch (JSONException | IOException e) {
+                        Log.e("Retrofit", "getBooksOfAuthor parse error : " + e.getMessage());
                     }
                 }
             }
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-                Log.d("Repository", "Retrofit error on getBooksOfAuthor(data, authorID)");
+                Log.e("Repository", "Retrofit error on getBooksOfAuthor : " + t.getMessage());
             }
         });
     }
 
-    public void createBookOfAuthor(MutableLiveData<Book> createdBook, String authorID){
-        bookService.createBookOfAuthor(authorID).enqueue(new Callback<ResponseBody>() {
+    public void createBookOfAuthor(MutableLiveData<Book> createdBook, String authorID, String title, Integer publicationYear, List<String> tagsID){
+        // Création du JSON pour le body de la Request
+        JSONObject jsonObject = new JSONObject();
+        try{
+            jsonObject.put("title", title);
+            if(publicationYear != null){
+                jsonObject.put("publication_year", publicationYear);
+            }
+        }
+        catch(JSONException e){
+            Log.e("Repository", "createBookOfAuthor JSON error: " + e.getMessage());
+            return;
+        }
+
+        RequestBody body = RequestBody.create(
+                jsonObject.toString(),
+                MediaType.parse("application/json")
+        );
+
+        bookService.createBookOfAuthor(authorID, body).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if(response.isSuccessful()){
+                    try{
+                        JSONObject json = new JSONObject(response.body().string());
+                        Book book = new Book(
+                                json.getInt("id"),
+                                json.getString("title"),
+                                null,
+                                json.getInt("authorId")
+                        );
 
+                        if(json.has("publication_year")){
+                            book.setPublicationYear(json.getInt("publication_year"));
+                        }
+
+                        if(tagsID.isEmpty()){
+                            createdBook.setValue(book);
+                            return;
+                        }
+
+                        for(String tagID : tagsID){
+                            associateTagToBook(createdBook, book, book.getID().toString(), tagID);
+                        }
+                    }catch (JSONException | IOException e) {
+                        Log.e("Retrofit", "createAuthor parse error : " + e.getMessage());
+                    }
+                }
             }
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-
+                Log.e("Repository", "Retrofit error on createBookOfAuthor : " + t.getMessage());
             }
         });
     }
@@ -301,20 +350,15 @@ public class Repository {
                         }
                         foundTags.setValue(tags);
                     }
-                    catch (JSONException | IOException exception){
-                        try {
-                            Log.d("Tags request", response.body().string());
-                        } catch (IOException e) {
-                            throw new RuntimeException(e);
-                        }
-                        Log.d("Tags request", exception.getMessage());
+                    catch (JSONException | IOException e) {
+                        Log.e("Retrofit", "getAllTags parse error : " + e.getMessage());
                     }
                 }
             }
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-                Log.d("Repository", "Retrofit error on getAllTags(data)");
+                Log.e("Repository", "Retrofit error on getAllTags : " + t.getMessage());
             }
         });
     }
@@ -340,39 +384,55 @@ public class Repository {
                         bookObj.setTags(tags);
                         book.setValue(bookObj);
                     }
-                    catch (JSONException | IOException exception){
-                        try {
-                            Log.d("Tags of book request", response.body().string());
-                        } catch (IOException e) {
-                            throw new RuntimeException(e);
-                        }
-                        Log.d("Tags of book request", exception.getMessage());
+                    catch (JSONException | IOException e) {
+                        Log.e("Retrofit", "getTagsOfBook parse error : " + e.getMessage());
                     }
                 }
             }
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-                Log.d("Repository", "Retrofit error on getTagsOfBook(data, bookID)");
+                Log.e("Repository", "Retrofit error on getTagsOfBook : " + t.getMessage());
             }
         });
     }
 
-    public void associateTagToBook(MutableLiveData<Book> associatedBook, String bookID, String tagID){
+    private void associateTagToBook(MutableLiveData<Book> associatedBook, Book book, String bookID, String tagID){
         tagService.associateTagToBook(bookID, tagID).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if(response.isSuccessful()){
+                    try{
+                        JSONObject json = new JSONObject(response.body().string());
+                        JSONArray tagsArray = json.getJSONArray("tags");
+                        List<Tag> tags = new ArrayList<>();
 
+                        for(int i=0; i<tagsArray.length(); i++){
+                            JSONObject jsonObject = tagsArray.getJSONObject(i);
+                            Tag tag = new Tag(
+                                    jsonObject.getInt("id"),
+                                    jsonObject.getString("name")
+                            );
+                            tags.add(tag);
+                        }
+
+                        book.setTags(tags);
+                        associatedBook.setValue(book);
+                    }
+                    catch(JSONException | IOException e){
+                        Log.e("Retrofit", "associateTagToBook parse error" + e.getMessage());
+                    }
+                }
             }
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-
+                Log.e("Repository", "Retrofit error on associateTagToBook : " + t.getMessage());
             }
         });
     }
 
-    public void dissociateTagToBook(MutableLiveData<Book> dissociateBook, String bookID, String tagID){
+    public void dissociateTagToBook(MutableLiveData<Book> dissociatedBook, Book book,String bookID, String tagID){
         tagService.dissociateTagToBook(bookID, tagID).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -381,7 +441,7 @@ public class Repository {
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-
+                Log.e("Repository", "Retrofit error on dissociateTagToBook : " + t.getMessage());
             }
         });
     }

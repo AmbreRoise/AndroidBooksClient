@@ -1,7 +1,9 @@
 package p42.androidbooksclient.db;
 
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import okhttp3.ResponseBody;
+import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
@@ -21,5 +23,5 @@ public interface BookService {
     Call<ResponseBody> getBooksOfAuthor(@Path("id") String authorID);
 
     @POST("authors/{id}/books")
-    Call<ResponseBody> createBookOfAuthor(@Path("id") String authorID);
+    Call<ResponseBody> createBookOfAuthor(@Path("id") String authorID, @Body RequestBody body);
 }
