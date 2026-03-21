@@ -151,7 +151,11 @@ public class Repository {
         authorService.deleteOneAuthor(authorID).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-
+                if(response.isSuccessful()){
+                    Log.i("Repository", "Author " + authorID + " deleted");
+                } else {
+                    Log.e("Repository", "deleteAuthor failed with status: " + response.code());
+                }
             }
 
             @Override
@@ -229,7 +233,11 @@ public class Repository {
         bookService.deleteOneBook(bookID).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-
+                if(response.isSuccessful()){
+                    Log.i("Repository", "Book " + bookID + " deleted");
+                } else {
+                    Log.e("Repository", "deleteBook failed with status: " + response.code());
+                }
             }
 
             @Override
