@@ -4,8 +4,8 @@
 
     <item
         android:id="@+id/bookList"
-        android:title="BookList" />
+        android:title="@string/booklist" />
     <item
         android:id="@+id/authorList"
-        android:title="AuthorList" />
+        android:title="@string/authorlist" />
 </menu>

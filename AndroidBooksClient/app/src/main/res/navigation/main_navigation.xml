@@ -7,14 +7,30 @@
 
     <fragment
         android:id="@+id/authorList"
-        android:name="p42.androidbooksclient.view.AuthorList"
+        android:name="p42.androidbooksclient.view.Author.AuthorList"
         android:label="fragment_author_list"
         tools:layout="@layout/fragment_author_list" >
+        <action
+            android:id="@+id/action_authorList_to_authorDescription"
+            app:destination="@id/authorDescription" />
     </fragment>
     <fragment
         android:id="@+id/bookList"
-        android:name="p42.androidbooksclient.view.BookList"
+        android:name="p42.androidbooksclient.view.Book.BookList"
         android:label="fragment_book_list"
         tools:layout="@layout/fragment_book_list" >
+        <action
+            android:id="@+id/action_bookList_to_bookDescription"
+            app:destination="@id/bookDescription" />
     </fragment>
+    <fragment
+        android:id="@+id/bookDescription"
+        android:name="p42.androidbooksclient.view.Book.BookDescription"
+        android:label="fragment_book_description"
+        tools:layout="@layout/fragment_book_description" />
+    <fragment
+        android:id="@+id/authorDescription"
+        android:name="p42.androidbooksclient.view.Author.AuthorDescription"
+        android:label="fragment_author_description"
+        tools:layout="@layout/fragment_author_description" />
 </navigation>

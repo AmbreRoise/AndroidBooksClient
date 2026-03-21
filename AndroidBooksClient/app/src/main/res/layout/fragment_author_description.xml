@@ -3,12 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.Author.AuthorList">
+    tools:context=".view.Author.AuthorDescription">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/authorList"
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scrollbars="vertical"/>
+        android:text="author" />
 
 </FrameLayout>

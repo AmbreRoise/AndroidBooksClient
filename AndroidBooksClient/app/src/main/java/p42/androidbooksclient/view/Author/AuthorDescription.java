@@ -1,19 +1,21 @@
-package p42.androidbooksclient.view;
+package p42.androidbooksclient.view.Author;
 
 import android.os.Bundle;
-import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
 import p42.androidbooksclient.R;
 
-public class AuthorList extends Fragment {
+public class AuthorDescription extends Fragment {
 
-    public AuthorList() {
-        super(R.layout.fragment_author_list);
+    public AuthorDescription() {
+        super(R.layout.fragment_author_description);
     }
-
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState){
         super.onViewCreated(view,savedInstanceState);
