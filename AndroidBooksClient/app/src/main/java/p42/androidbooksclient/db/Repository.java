@@ -151,7 +151,11 @@ public class Repository {
         authorService.deleteOneAuthor(authorID).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-
+                if(response.isSuccessful()){
+                    Log.i("Repository", "Author " + authorID + " deleted");
+                } else {
+                    Log.e("Repository", "deleteAuthor failed with status: " + response.code());
+                }
             }
 
             @Override
