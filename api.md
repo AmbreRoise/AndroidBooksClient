@@ -16,8 +16,7 @@ Si vous ne souhaitez pas cloner le dépôt, la récupération par .zip est égal
 Une fois le dépôt récupéré, allez à l'intérieur et plus particulièrement dans le dossier `books` :  
 
 ```bash
-cd w41/
-cd books/
+cd w41/books/
 ```
 
 Exécutez ensuite la commande suivante afin de démarrer l'api :  
