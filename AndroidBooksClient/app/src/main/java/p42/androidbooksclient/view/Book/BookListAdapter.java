@@ -7,19 +7,24 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.List;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 
 import p42.androidbooksclient.R;
+import p42.androidbooksclient.model.Book;
 
 public class BookListAdapter extends RecyclerView.Adapter<BookListViewHolder> {
-    private final JSONArray _books;
+    private final List<Book> _books;
     private final OnNoteListener _onNoteListener;
+    private final int _navigationAction;
 
 
-    public BookListAdapter(JSONArray data, OnNoteListener onNoteListener){
+    public BookListAdapter(List<Book> data, OnNoteListener onNoteListener, int navigationAction){
         _books = data;
         _onNoteListener = onNoteListener;
+        _navigationAction = navigationAction;
     }
 
     @NonNull
@@ -27,27 +32,23 @@ public class BookListAdapter extends RecyclerView.Adapter<BookListViewHolder> {
     public  BookListViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType){
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.booklist_view_holder, parent, false);
-        return new BookListViewHolder(view, this._onNoteListener);
+        return new BookListViewHolder(view, this._onNoteListener, this._navigationAction);
     }
 
     @Override
     public void onBindViewHolder(@NonNull BookListViewHolder holder, int position){
-        try {
-            String title = _books.getJSONObject(position).getString("title");
-            holder.setBookName(title);
-        } catch (JSONException e) {
-            e.printStackTrace();
-            holder.setBookName("Erreur de titre");
-        }
+        Book book = _books.get(position);
+        holder.setBookName(book.getTitle());
+        holder.setBookId(book.getID());
     }
 
     @Override
     public int getItemCount(){
-        return _books.length();
+        return _books.size();
     }
 
     public interface OnNoteListener{
-        void onNoteClick(int position);
+        void onNoteClick(int bookId);
     }
 
 }

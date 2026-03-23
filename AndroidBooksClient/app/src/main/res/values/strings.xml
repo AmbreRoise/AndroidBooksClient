@@ -1,10 +1,23 @@
 <resources>
     <string name="app_name">Android BooksClient</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="listbook">listbook</string>
     <string name="booklist">BookList</string>
     <string name="authorlist">AuthorList</string>
-    <string name="bookename">BookeName</string>
-    <string name="authorname">authorname</string>
+    <string name="BDTitle">Titre</string>
+    <string name="BDYear">Année</string>
+    <string name="BDAuthor">Auteur</string>
+    <string name="BDTags">Tags</string>
+    <string name="ADAuthorName">Auteur</string>
+    <string name="BDRemoveBook">Supprimer le livre</string>
+    <string name="BLAAddBook">Ajouter un livre</string>
+    <string name="BCTitle">Titre du livre</string>
+    <string name="BCYear">Année de publication</string>
+    <string name="BCAuthor">ID de l\'auteur</string>
+    <string name="BCCreateButton">Créer le livre</string>
+    <string name="BCAuteur">Auteur</string>
+    <string name="BCTags">Tags</string>
+    <string name="ADRemoveAuthor">Supprimer l\'auteur</string>
+    <string name="ACFirstname">Prénom</string>
+    <string name="ACLastname">Nom</string>
+    <string name="ACCreateButton">Créer l\'auteur</string>
+    <string name="ALAAddAuthor">Ajouter un auteur</string>
 </resources>

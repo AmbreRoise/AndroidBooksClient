@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_authorList_to_authorDescription"
             app:destination="@id/authorDescription" />
+        <action
+            android:id="@+id/action_authorList_to_authorCreate"
+            app:destination="@id/authorCreate" />
     </fragment>
     <fragment
         android:id="@+id/bookList"
@@ -22,6 +25,9 @@
         <action
             android:id="@+id/action_bookList_to_bookDescription"
             app:destination="@id/bookDescription" />
+        <action
+            android:id="@+id/action_bookList_to_bookCreate"
+            app:destination="@id/bookCreate" />
     </fragment>
     <fragment
         android:id="@+id/bookDescription"
@@ -32,5 +38,19 @@
         android:id="@+id/authorDescription"
         android:name="p42.androidbooksclient.view.Author.AuthorDescription"
         android:label="fragment_author_description"
-        tools:layout="@layout/fragment_author_description" />
+        tools:layout="@layout/fragment_author_description" >
+        <action
+            android:id="@+id/action_authorDescription_to_bookDescription"
+            app:destination="@id/bookDescription" />
+    </fragment>
+    <fragment
+        android:id="@+id/bookCreate"
+        android:name="p42.androidbooksclient.view.Book.BookCreate"
+        android:label="fragment_book_create"
+        tools:layout="@layout/fragment_book_create" />
+    <fragment
+        android:id="@+id/authorCreate"
+        android:name="p42.androidbooksclient.view.Author.AuthorCreate"
+        android:label="fragment_author_create"
+        tools:layout="@layout/fragment_author_create" />
 </navigation>

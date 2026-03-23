@@ -10,14 +10,17 @@ import androidx.recyclerview.widget.RecyclerView;
 import org.json.JSONArray;
 import org.json.JSONException;
 
+import java.util.List;
+
 import p42.androidbooksclient.R;
+import p42.androidbooksclient.model.Author;
 import p42.androidbooksclient.view.Book.BookListAdapter;
 
 public class AuthorListAdapter extends RecyclerView.Adapter<AuthorListViewHolder> {
-    private final JSONArray _authors;
+    private final List<Author> _authors;
     private final OnNoteListener _onNoteListener;
 
-    public AuthorListAdapter(JSONArray data, OnNoteListener onNoteListener){
+    public AuthorListAdapter(List<Author> data, OnNoteListener onNoteListener){
         _authors = data;
         _onNoteListener = onNoteListener;
     }
@@ -32,22 +35,17 @@ public class AuthorListAdapter extends RecyclerView.Adapter<AuthorListViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull AuthorListViewHolder holder, int position){
-        try {
-            String firstname = _authors.getJSONObject(position).getString("firstname");
-            String lastname = _authors.getJSONObject(position).getString("lastname");
-            holder.setAuthorName(firstname,lastname);
-        } catch (JSONException e) {
-            e.printStackTrace();
-            holder.setAuthorName("Erreur de nom d'auteur","Dommage");
-        }
+        Author author = _authors.get(position);
+        holder.setAuthorName(author.getFirstname(), author.getLastname());
+        holder.setAuthorId(author.getID());
     }
 
     @Override
     public int getItemCount(){
-        return _authors.length();
+        return _authors.size();
     }
 
     public interface OnNoteListener{
-        void onNoteClick(int position);
+        void onNoteClick(int authorId);
     }
 }

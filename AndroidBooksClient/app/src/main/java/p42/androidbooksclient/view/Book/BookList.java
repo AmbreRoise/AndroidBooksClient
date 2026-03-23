@@ -5,6 +5,7 @@ import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
@@ -14,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import org.json.JSONArray;
 
 import p42.androidbooksclient.R;
+import p42.androidbooksclient.viewmodel.BookViewModel;
 
 public class BookList extends Fragment implements BookListAdapter.OnNoteListener{
 
@@ -24,31 +26,22 @@ public class BookList extends Fragment implements BookListAdapter.OnNoteListener
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState){
         super.onViewCreated(view,savedInstanceState);
 
+        view.findViewById(R.id.fabAddBook).setOnClickListener(v -> {
+            Navigation.findNavController(view).navigate(R.id.action_bookList_to_bookCreate);
+        });
+
+        BookViewModel bookData = new ViewModelProvider(this).get(BookViewModel.class);
+
         RecyclerView recycler = view.findViewById(R.id.bookList);
         recycler.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        JSONArray data = loadJSONFromAsset();
-
-        BookListAdapter adapter = new BookListAdapter(data,this);
-        recycler.setAdapter(adapter);
+        bookData.fetchAllBooks();
+        bookData.getBooks().observe(getViewLifecycleOwner(), data -> {
+            BookListAdapter adapter = new BookListAdapter(data,this, R.id.action_bookList_to_bookDescription);
+            recycler.setAdapter(adapter);
+        });
 
     }
-    public void onNoteClick(int position){
+    public void onNoteClick(int bookId){
     }
-
-    private JSONArray loadJSONFromAsset() {
-        try {
-            java.io.InputStream is = requireContext().getAssets().open("books.json");
-            int size = is.available();
-            byte[] buffer = new byte[size];
-            is.read(buffer);
-            is.close();
-            String json = new String(buffer, "UTF-8");
-            return new JSONArray(json);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
 }

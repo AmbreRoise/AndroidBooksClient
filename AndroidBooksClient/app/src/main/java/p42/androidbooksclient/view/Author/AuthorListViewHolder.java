@@ -1,5 +1,6 @@
 package p42.androidbooksclient.view.Author;
 
+import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
@@ -12,6 +13,7 @@ import p42.androidbooksclient.view.Book.BookListAdapter;
 
 public class AuthorListViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
     private  final TextView textView;
+    private  int _authorId;
     AuthorListAdapter.OnNoteListener onNoteListener;
 
     public AuthorListViewHolder(@NonNull View itemView, AuthorListAdapter.OnNoteListener onNoteListener){
@@ -23,11 +25,17 @@ public class AuthorListViewHolder extends RecyclerView.ViewHolder implements Vie
 
     @Override
     public void onClick(View v){
-        this.onNoteListener.onNoteClick(getAbsoluteAdapterPosition());
-        Navigation.findNavController(v).navigate(R.id.action_authorList_to_authorDescription);
+        this.onNoteListener.onNoteClick(_authorId);
+        Bundle bundle = new Bundle();
+        bundle.putInt("authorId", _authorId);
+        Navigation.findNavController(v).navigate(R.id.action_authorList_to_authorDescription, bundle);
     }
 
     public void setAuthorName(String firstname, String lastname){
         textView.setText(firstname + " " + lastname);
+    }
+
+    public void setAuthorId(int id){
+        _authorId = id;
     }
 }

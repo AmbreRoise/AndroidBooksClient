@@ -5,26 +5,28 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp"
-    tools:context=".view.Author.AuthorDescription">
+    tools:context=".view.Author.AuthorCreate">
 
-    <TextView
-        android:id="@+id/authorName"
+    <EditText
+        android:id="@+id/inputFirstname"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:layout_marginBottom="16dp"
-        android:text="@string/ADAuthorName" />
+        android:hint="@string/ACFirstname"
+        android:layout_marginBottom="12dp"
+        android:inputType="text" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/authorBookList"
+    <EditText
+        android:id="@+id/inputLastname"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"/>
+        android:layout_height="wrap_content"
+        android:hint="@string/ACLastname"
+        android:layout_marginBottom="24dp"
+        android:inputType="text" />
 
     <Button
-        android:id="@+id/deleteAuthorButton"
+        android:id="@+id/confirmCreateAuthor"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/ADRemoveAuthor"/>
+        android:text="@string/ACCreateButton" />
+
 </LinearLayout>

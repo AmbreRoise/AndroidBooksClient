@@ -5,6 +5,8 @@ import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -13,6 +15,7 @@ import org.json.JSONArray;
 import p42.androidbooksclient.R;
 import p42.androidbooksclient.model.Author;
 import p42.androidbooksclient.view.Book.BookListAdapter;
+import p42.androidbooksclient.viewmodel.AuthorViewModel;
 
 public class AuthorList extends Fragment implements AuthorListAdapter.OnNoteListener {
 
@@ -23,31 +26,24 @@ public class AuthorList extends Fragment implements AuthorListAdapter.OnNoteList
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState){
         super.onViewCreated(view,savedInstanceState);
 
+        view.findViewById(R.id.fabAddAuthor).setOnClickListener(v -> {
+            Navigation.findNavController(view).navigate(R.id.action_authorList_to_authorCreate);
+        });
+
+        AuthorViewModel authorData = new ViewModelProvider(this).get(AuthorViewModel.class);
+
         RecyclerView recycler = view.findViewById(R.id.authorList);
         recycler.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        JSONArray data = loadJSONFromAsset();
 
-        AuthorListAdapter adapter = new AuthorListAdapter(data,this);
-        recycler.setAdapter(adapter);
+        authorData.fetchAllAuthors();
+        authorData.getAuthors().observe(getViewLifecycleOwner(), data -> {
+            AuthorListAdapter adapter = new AuthorListAdapter(data, this);
+            recycler.setAdapter(adapter);
+        });
 
     }
-    public void onNoteClick(int position){
-    }
-
-    private JSONArray loadJSONFromAsset() {
-        try {
-            java.io.InputStream is = requireContext().getAssets().open("authors.json");
-            int size = is.available();
-            byte[] buffer = new byte[size];
-            is.read(buffer);
-            is.close();
-            String json = new String(buffer, "UTF-8");
-            return new JSONArray(json);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
+    public void onNoteClick(int authorId){
     }
 
 }
