@@ -1,0 +1,49 @@
+package p42.androidbooksclient.view.Author;
+
+import android.os.Bundle;
+import android.view.View;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import org.json.JSONArray;
+
+import p42.androidbooksclient.R;
+import p42.androidbooksclient.model.Author;
+import p42.androidbooksclient.view.Book.BookListAdapter;
+import p42.androidbooksclient.viewmodel.AuthorViewModel;
+
+public class AuthorList extends Fragment implements AuthorListAdapter.OnNoteListener {
+
+    public AuthorList() {
+        super(R.layout.fragment_author_list);
+    }
+    @Override
+    public void onViewCreated(@NonNull View view, Bundle savedInstanceState){
+        super.onViewCreated(view,savedInstanceState);
+
+        view.findViewById(R.id.fabAddAuthor).setOnClickListener(v -> {
+            Navigation.findNavController(view).navigate(R.id.action_authorList_to_authorCreate);
+        });
+
+        AuthorViewModel authorData = new ViewModelProvider(this).get(AuthorViewModel.class);
+
+        RecyclerView recycler = view.findViewById(R.id.authorList);
+        recycler.setLayoutManager(new LinearLayoutManager(getContext()));
+
+
+        authorData.fetchAllAuthors();
+        authorData.getAuthors().observe(getViewLifecycleOwner(), data -> {
+            AuthorListAdapter adapter = new AuthorListAdapter(data, this);
+            recycler.setAdapter(adapter);
+        });
+
+    }
+    public void onNoteClick(int authorId){
+    }
+
+}
