@@ -453,4 +453,40 @@ public class Repository {
             }
         });
     }
+
+    public void createTag(MutableLiveData<Tag> createdTag, String name){
+        // Création du JSON pour le body de la Request
+        JSONObject jsonObject = new JSONObject();
+        try{
+            jsonObject.put("name", name);
+        }
+        catch(JSONException e){
+            Log.e("Repository", "createTag JSON error: " + e.getMessage());
+            return;
+        }
+
+        RequestBody body = RequestBody.create(
+                jsonObject.toString(),
+                MediaType.parse("application/json")
+        );
+
+        tagService.createTag(body).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if(response.isSuccessful()){
+                    try{
+                        JSONObject json = new JSONObject(response.body().toString());
+                    }
+                    catch(JSONException | IOException e){
+                        Log.e("Retrofit", "createTag parse error" + e.getMessage());
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Log.e("Repository", "Retrofit error on createTag : " + t.getMessage());
+            }
+        });
+    }
 }

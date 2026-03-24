@@ -1,7 +1,9 @@
 package p42.androidbooksclient.db;
 
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import okhttp3.ResponseBody;
+import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
@@ -19,4 +21,7 @@ public interface TagService {
 
     @DELETE("books/{book_id}/tags/{tag_id}")
     Call<ResponseBody> dissociateTagToBook(@Path("book_id") String bookID, @Path("tag_id") String tagID);
+
+    @POST("tags")
+    Call<ResponseBody> createTag(@Body RequestBody body);
 }
