@@ -476,8 +476,14 @@ public class Repository {
                 if(response.isSuccessful()){
                     try{
                         JSONObject json = new JSONObject(response.body().toString());
+                        Tag tag = new Tag(
+                                json.getInt("id"),
+                                json.getString("name")
+                        );
+
+                        createdTag.setValue(tag);
                     }
-                    catch(JSONException | IOException e){
+                    catch(JSONException e){
                         Log.e("Retrofit", "createTag parse error" + e.getMessage());
                     }
                 }
