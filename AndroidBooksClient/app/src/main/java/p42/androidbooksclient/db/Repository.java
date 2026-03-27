@@ -24,7 +24,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 
 public class Repository {
-    private static final String API_URL = "http://127.0.0.1:3000/";
+    private static final String API_URL = "http://localhost:3000/";
     private AuthorService authorService;
     private BookService bookService;
     private TagService tagService;
@@ -180,7 +180,7 @@ public class Repository {
                             Book book = new Book(
                                     jsonObject.getInt("id"),
                                     jsonObject.getString("title"),
-                                    jsonObject.getInt("publication_year"),
+                                    jsonObject.isNull("publication_year") ? null : jsonObject.getInt("publication_year"),
                                     jsonObject.getInt("authorId")
                             );
                             books.add(book);
@@ -210,7 +210,7 @@ public class Repository {
                         Book book = new Book(
                                 json.getInt("id"),
                                 json.getString("title"),
-                                json.getInt("publication_year"),
+                                json.isNull("publication_year") ? null : json.getInt("publication_year"),
                                 json.getInt("authorId")
                         );
 
@@ -261,7 +261,7 @@ public class Repository {
                             Book book = new Book(
                                     jsonObject.getInt("id"),
                                     jsonObject.getString("title"),
-                                    jsonObject.getInt("publication_year"),
+                                    jsonObject.isNull("publication_year") ? null : jsonObject.getInt("publication_year"),
                                     jsonObject.getInt("authorId")
                             );
                             books.add(book);
@@ -313,7 +313,7 @@ public class Repository {
                                 json.getInt("authorId")
                         );
 
-                        if(json.has("publication_year")){
+                        if(json.has("publication_year") && !json.isNull("publication_year")){
                             book.setPublicationYear(json.getInt("publication_year"));
                         }
 

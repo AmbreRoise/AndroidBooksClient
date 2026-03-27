@@ -1,4 +1,4 @@
-package p42.androidbooksclient;
+package p42.androidbooksclient.view;
 
 import android.os.Bundle;
 import android.widget.TextView;
@@ -8,15 +8,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
-import androidx.lifecycle.MutableLiveData;
+import androidx.navigation.NavController;
+import androidx.navigation.fragment.NavHostFragment;
+import androidx.navigation.ui.NavigationUI;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import p42.androidbooksclient.db.Repository;
-import p42.androidbooksclient.model.Author;
-import p42.androidbooksclient.model.Book;
-import p42.androidbooksclient.model.Tag;
+import p42.androidbooksclient.R;
 
 public class MainActivity extends AppCompatActivity {
     public MainActivity(){
@@ -32,5 +30,10 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        NavHostFragment navHost = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.fragmentContainerView);
+        NavController navController = navHost.getNavController();
+        BottomNavigationView bnv = findViewById(R.id.bottomNavigationView);
+        NavigationUI.setupWithNavController(bnv,navController);
     }
 }
