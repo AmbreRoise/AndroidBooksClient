@@ -6,12 +6,17 @@ import okhttp3.ResponseBody;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.GET;
+import retrofit2.http.PATCH;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface BookService {
     @GET("books")
     Call<ResponseBody> getBooks();
+
+    @GET("books")
+    Call<ResponseBody> getBooksFilter(@Query("title") String filter);
 
     @GET("books/{id}")
     Call<ResponseBody> getOneBook(@Path("id") String bookID);
@@ -24,4 +29,7 @@ public interface BookService {
 
     @POST("authors/{id}/books")
     Call<ResponseBody> createBookOfAuthor(@Path("id") String authorID, @Body RequestBody body);
+
+    @PATCH("books/{id}")
+    Call<ResponseBody> updateOneBook(@Path("id") String bookID, @Body RequestBody body);
 }
