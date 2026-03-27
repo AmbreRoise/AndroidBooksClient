@@ -49,17 +49,7 @@ public class Repository {
                 if(response.isSuccessful()){
                     try{
                         JSONArray json = new JSONArray(response.body().string());
-                        List<Author> authors = new ArrayList<>();
-
-                        for(int i=0; i<json.length(); i++){
-                            JSONObject jsonObject = json.getJSONObject(i);
-                            Author author = new Author(
-                                jsonObject.getInt("id"),
-                                jsonObject.getString("firstname"),
-                                jsonObject.getString("lastname")
-                            );
-                            authors.add(author);
-                        }
+                        List<Author> authors = getListAuthors(json);
 
                         foundAuthors.setValue(authors);
                     }
@@ -74,6 +64,45 @@ public class Repository {
                 Log.e("Repository", "Retrofit error on getAllAuthors : " + t.getMessage());
             }
         });
+    }
+
+    public void getAllAuthorsFilter(MutableLiveData<List<Author>> foundAuthors, String filter){
+        authorService.getAuthorsFilter(filter).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if(response.isSuccessful()){
+                    try{
+                        JSONArray json = new JSONArray(response.body().toString());
+                        List<Author> authors = getListAuthors(json);
+                        foundAuthors.setValue(authors);
+                    }
+                    catch (JSONException e){
+                        Log.e("Retrofit", "getAllAuthorsFilter parse error : " + e.getMessage());
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Log.e("Repository", "Retrofit error on getAllAuthorsFilter : " + t.getMessage());
+            }
+        });
+    }
+
+    private List<Author> getListAuthors(JSONArray json) throws JSONException {
+        List<Author> authors = new ArrayList<>();
+
+        for(int i=0; i<json.length(); i++){
+            JSONObject jsonObject = json.getJSONObject(i);
+            Author author = new Author(
+                    jsonObject.getInt("id"),
+                    jsonObject.getString("firstname"),
+                    jsonObject.getString("lastname")
+            );
+            authors.add(author);
+        }
+
+        return authors;
     }
 
     public void getOneAuthor(MutableLiveData<Author> foundAuthor, String authorID){
@@ -173,18 +202,7 @@ public class Repository {
                 if(response.isSuccessful()){
                     try{
                         JSONArray json = new JSONArray(response.body().string());
-                        List<Book> books = new ArrayList<>();
-
-                        for(int i=0; i<json.length(); i++){
-                            JSONObject jsonObject = json.getJSONObject(i);
-                            Book book = new Book(
-                                    jsonObject.getInt("id"),
-                                    jsonObject.getString("title"),
-                                    jsonObject.isNull("publication_year") ? null : jsonObject.getInt("publication_year"),
-                                    jsonObject.getInt("authorId")
-                            );
-                            books.add(book);
-                        }
+                        List<Book> books = getListBooks(json);
                         foundBooks.setValue(books);
                     }
                     catch (JSONException | IOException e){
@@ -198,6 +216,45 @@ public class Repository {
                 Log.e("Repository", "Retrofit error on getAllBooks : " + t.getMessage());
             }
         });
+    }
+
+    public void getAllBooksFilter(MutableLiveData<List<Book>> foundBooks, String filter){
+        bookService.getBooksFilter(filter).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if(response.isSuccessful()){
+                    try{
+                        JSONArray json = new JSONArray(response.body().string());
+                        List<Book> books = getListBooks(json);
+                        foundBooks.setValue(books);
+                    }catch (JSONException | IOException e) {
+                        Log.e("Retrofit", "getAllBooksFilter parse error : " + e.getMessage());
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Log.e("Repository", "Retrofit error on getAllBooksFilter : " + t.getMessage());
+            }
+        });
+    }
+
+    private List<Book> getListBooks(JSONArray json) throws JSONException {
+        List<Book> books = new ArrayList<>();
+
+        for(int i=0; i<json.length(); i++){
+            JSONObject jsonObject = json.getJSONObject(i);
+            Book book = new Book(
+                    jsonObject.getInt("id"),
+                    jsonObject.getString("title"),
+                    jsonObject.isNull("publication_year") ? null : jsonObject.getInt("publication_year"),
+                    jsonObject.getInt("authorId")
+            );
+            books.add(book);
+        }
+
+        return books;
     }
 
     public void getOneBook(MutableLiveData<Book> foundBook, String bookID){
@@ -338,6 +395,56 @@ public class Repository {
         });
     }
 
+    public void updateBook(MutableLiveData<Book> updatedBook, String bookID, String title, Integer publicationYear){
+        // Création du JSON pour le body de la Request
+        JSONObject jsonObject = new JSONObject();
+        try{
+            if(title != null){
+                jsonObject.put("title", title);
+            }
+
+            if(publicationYear != null){
+                jsonObject.put("publication_year", publicationYear);
+            }
+        }
+        catch(JSONException e){
+            Log.e("Repository", "updateBook JSON error: " + e.getMessage());
+            return;
+        }
+
+        RequestBody body = RequestBody.create(
+                jsonObject.toString(),
+                MediaType.parse("application/json")
+        );
+
+        bookService.updateOneBook(bookID, body).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if(response.isSuccessful()){
+                    try{
+                        JSONObject json = new JSONObject(response.body().toString());
+                        Book book = new Book(
+                                json.getInt("id"),
+                                json.getString("title"),
+                                json.getInt("publication_year"),
+                                json.getInt("authorId")
+                        );
+
+                        updatedBook.setValue(book);
+                    }
+                    catch(JSONException e){
+                        Log.e("Retrofit", "updateBook parse error : " + e.getMessage());
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Log.e("Repository", "Retrofit error on updateBook : " + t.getMessage());
+            }
+        });
+    }
+
     // ================== TAGS ======================
     public void getAllTags(MutableLiveData<List<Tag>> foundTags){
         tagService.getTags().enqueue(new Callback<ResponseBody>() {
@@ -444,7 +551,25 @@ public class Repository {
         tagService.dissociateTagToBook(bookID, tagID).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-
+                if(response.isSuccessful()){
+                    try{
+                        JSONObject json = new JSONObject(response.body().toString());
+                        JSONArray tagsJson = json.getJSONArray("tags");
+                        List<Tag> tags = new ArrayList<>();
+                        for(int i=0; i<tagsJson.length(); i++){
+                            Tag tag = new Tag(
+                                    tagsJson.getJSONObject(i).getInt("id"),
+                                    tagsJson.getJSONObject(i).getString("name")
+                            );
+                            tags.add(tag);
+                        }
+                        book.setTags(tags);
+                        dissociatedBook.setValue(book);
+                    }
+                    catch(JSONException e){
+                        Log.e("Retrofit", "dissociateTagToBook parse error" + e.getMessage());
+                    }
+                }
             }
 
             @Override
