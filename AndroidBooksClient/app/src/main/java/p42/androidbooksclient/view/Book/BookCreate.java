@@ -44,6 +44,10 @@ public class BookCreate extends Fragment {
         Spinner spinnerAuthor = view.findViewById(R.id.spinnerAuthor);
         LinearLayout tagsContainer = view.findViewById(R.id.tagsContainer);
 
+        view.findViewById(R.id.createTag).setOnClickListener(v -> {
+            Navigation.findNavController(view).navigate(R.id.action_bookCreate_to_tagCreate);
+        });
+
         authorViewModel.fetchAllAuthors();
         authorViewModel.getAuthors().observe(getViewLifecycleOwner(), authors -> {
             if(authors != null){

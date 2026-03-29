@@ -47,10 +47,19 @@
         android:id="@+id/bookCreate"
         android:name="p42.androidbooksclient.view.Book.BookCreate"
         android:label="fragment_book_create"
-        tools:layout="@layout/fragment_book_create" />
+        tools:layout="@layout/fragment_book_create" >
+        <action
+            android:id="@+id/action_bookCreate_to_tagCreate"
+            app:destination="@id/tagCreate" />
+    </fragment>
     <fragment
         android:id="@+id/authorCreate"
         android:name="p42.androidbooksclient.view.Author.AuthorCreate"
         android:label="fragment_author_create"
         tools:layout="@layout/fragment_author_create" />
+    <fragment
+        android:id="@+id/tagCreate"
+        android:name="p42.androidbooksclient.view.Book.TagCreate"
+        android:label="fragment_tag_create"
+        tools:layout="@layout/fragment_tag_create" />
 </navigation>
