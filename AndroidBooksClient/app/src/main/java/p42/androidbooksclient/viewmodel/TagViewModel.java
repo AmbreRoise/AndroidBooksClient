@@ -16,7 +16,7 @@ public class TagViewModel extends ViewModel {
     private MutableLiveData<Tag> _tag = new MutableLiveData<>();
 
     public TagViewModel() {
-        _repository = new Repository();
+        _repository = Repository.getInstance();
     }
 
     public void fetchAllTags() {

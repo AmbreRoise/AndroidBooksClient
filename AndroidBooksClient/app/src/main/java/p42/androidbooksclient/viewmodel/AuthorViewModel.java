@@ -16,7 +16,7 @@ public class AuthorViewModel extends ViewModel {
     private MutableLiveData<Author> _author = new MutableLiveData<>();
 
     public AuthorViewModel() {
-        _repository = new Repository();
+        _repository = Repository.getInstance();
     }
 
     public void fetchAllAuthors() {

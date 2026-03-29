@@ -24,13 +24,14 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 
 public class Repository {
+    private static Repository _instance = null;
     private static final String API_URL = "http://localhost:3000/";
     private AuthorService authorService;
     private BookService bookService;
     private TagService tagService;
     private Retrofit retrofit;
 
-    public Repository(){
+    private Repository(){
         retrofit = new Retrofit.Builder()
                 .baseUrl(API_URL)
                 .build();
@@ -38,6 +39,13 @@ public class Repository {
         authorService = retrofit.create(AuthorService.class);
         bookService = retrofit.create(BookService.class);
         tagService = retrofit.create(TagService.class);
+    }
+
+    public static Repository getInstance() {
+        if(_instance == null){
+            _instance = new Repository();
+        }
+        return _instance;
     }
 
     // ================== AUTHORS ======================

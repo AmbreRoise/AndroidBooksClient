@@ -16,7 +16,7 @@ public class BookViewModel extends ViewModel {
     private MutableLiveData<Book> _book = new MutableLiveData<>();
 
     public BookViewModel() {
-        _repository = new Repository();
+        _repository = Repository.getInstance();
     }
 
     public void fetchAllBooks() {
