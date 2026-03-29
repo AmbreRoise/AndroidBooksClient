@@ -14,6 +14,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import org.json.JSONArray;
 
+import java.util.ArrayList;
+
 import p42.androidbooksclient.R;
 import p42.androidbooksclient.viewmodel.BookViewModel;
 
@@ -35,10 +37,12 @@ public class BookList extends Fragment implements BookListAdapter.OnNoteListener
         RecyclerView recycler = view.findViewById(R.id.bookList);
         recycler.setLayoutManager(new LinearLayoutManager(getContext()));
 
+        BookListAdapter adapter = new BookListAdapter(new ArrayList<>(),this, R.id.action_bookList_to_bookDescription);
+        recycler.setAdapter(adapter);
+
         bookData.fetchAllBooks();
         bookData.getBooks().observe(getViewLifecycleOwner(), data -> {
-            BookListAdapter adapter = new BookListAdapter(data,this, R.id.action_bookList_to_bookDescription);
-            recycler.setAdapter(adapter);
+            adapter.updateData(data);
         });
 
     }
