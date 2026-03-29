@@ -600,7 +600,7 @@ public class Repository {
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if(response.isSuccessful()){
                     try{
-                        JSONObject json = new JSONObject(response.body().toString());
+                        JSONObject json = new JSONObject(response.body().string());
                         Tag tag = new Tag(
                                 json.getInt("id"),
                                 json.getString("name")
@@ -608,7 +608,7 @@ public class Repository {
 
                         createdTag.setValue(tag);
                     }
-                    catch(JSONException e){
+                    catch(JSONException | IOException e){
                         Log.e("Retrofit", "createTag parse error" + e.getMessage());
                     }
                 }

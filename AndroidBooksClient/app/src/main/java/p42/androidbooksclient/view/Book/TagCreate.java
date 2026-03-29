@@ -6,15 +6,10 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.Toast;
 
-import java.util.ArrayList;
-import java.util.List;
+import androidx.navigation.Navigation;
 
 import p42.androidbooksclient.R;
 import p42.androidbooksclient.viewmodel.TagViewModel;
@@ -29,9 +24,14 @@ public class TagCreate extends Fragment {
 
         TagViewModel tagViewModel = new ViewModelProvider(this).get(TagViewModel.class);
 
+        tagViewModel.getTag().observe(getViewLifecycleOwner(), tag -> {
+            if(tag != null){
+                Navigation.findNavController(view).navigateUp();
+            }
+        });
+
         view.findViewById(R.id.confirmCreateBook).setOnClickListener(v -> {
             EditText inputTag = view.findViewById(R.id.inputTag);
-
             String tagStr = inputTag.getText().toString().trim();
 
             inputTag.setError(null);
@@ -40,8 +40,7 @@ public class TagCreate extends Fragment {
                 inputTag.setError("The Tag must have a name");
             }
 
-            //create the tag
-
+            tagViewModel.createTag(tagStr);
         });
 
     }
