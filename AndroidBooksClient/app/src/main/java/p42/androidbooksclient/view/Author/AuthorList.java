@@ -2,6 +2,7 @@ package p42.androidbooksclient.view.Author;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -41,6 +42,16 @@ public class AuthorList extends Fragment implements AuthorListAdapter.OnNoteList
         recycler.setAdapter(adapter);
 
         authorData.fetchAllAuthors();
+
+        view.findViewById(R.id.BLConfirmFilter).setOnClickListener(v -> {
+            String filter = ((EditText) view.findViewById(R.id.searchBookName)).getText().toString().trim();
+            if(filter.isEmpty()){
+                authorData.fetchAllAuthors();
+            } else {
+                authorData.fetchAllAuthorsFilter(filter);
+            }
+        });
+
         authorData.getAuthors().observe(getViewLifecycleOwner(), data -> {
             adapter.updateData(data);
         });

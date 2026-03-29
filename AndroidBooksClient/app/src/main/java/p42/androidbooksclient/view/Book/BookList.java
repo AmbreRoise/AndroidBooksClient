@@ -2,6 +2,7 @@ package p42.androidbooksclient.view.Book;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -41,6 +42,17 @@ public class BookList extends Fragment implements BookListAdapter.OnNoteListener
         recycler.setAdapter(adapter);
 
         bookData.fetchAllBooks();
+
+        view.findViewById(R.id.BLConfirmFilter).setOnClickListener(v -> {
+            String filter = ((EditText) view.findViewById(R.id.searchBookName)).getText().toString().trim();
+            if(filter.isEmpty()){
+                bookData.fetchAllBooks();
+            } else {
+                bookData.fetchAllBooksFilter(filter);
+            }
+        });
+
+
         bookData.getBooks().observe(getViewLifecycleOwner(), data -> {
             adapter.updateData(data);
         });

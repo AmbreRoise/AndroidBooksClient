@@ -23,6 +23,9 @@ public class BookViewModel extends ViewModel {
         _repository.getAllBooks(_books);
     }
 
+    public void fetchAllBooksFilter(String filter) {
+        _repository.getAllBooksFilter(_books, filter);
+    }
     public void fetchOneBook(String bookID) {
         _repository.getOneBook(_book, bookID);
     }

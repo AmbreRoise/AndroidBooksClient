@@ -2,7 +2,7 @@
     <string name="app_name">Android BooksClient</string>
     <string name="booklist">BookList</string>
     <string name="authorlist">AuthorList</string>
-    <string name="BDTitle">Titre</string>
+    <string name="BDTitle">Title</string>
     <string name="BDYear">Year</string>
     <string name="BDAuthor">Author</string>
     <string name="BDTags">Tags</string>
@@ -23,4 +23,7 @@
     <string name="TCname_of_the_tag">Name of the Tag</string>
     <string name="TCcreate_the_tag">Create the Tag</string>
     <string name="BLfilter_by_book_title">Filter by book title</string>
+    <string name="BLFilterButton">Filter</string>
+    <string name="ALfilter_by_lastname">Filter by lastname</string>
+    <string name="ALFilterButton">Filter</string>
 </resources>

@@ -23,6 +23,10 @@ public class AuthorViewModel extends ViewModel {
         _repository.getAllAuthors(_authors);
     }
 
+    public void fetchAllAuthorsFilter(String filter) {
+        _repository.getAllAuthorsFilter(_authors, filter);
+    }
+
     public void fetchOneAuthor(String authorID) {
         _repository.getOneAuthor(_author, authorID);
     }

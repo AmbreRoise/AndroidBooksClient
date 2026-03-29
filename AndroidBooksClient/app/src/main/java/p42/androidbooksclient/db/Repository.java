@@ -80,11 +80,11 @@ public class Repository {
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if(response.isSuccessful()){
                     try{
-                        JSONArray json = new JSONArray(response.body().toString());
+                        JSONArray json = new JSONArray(response.body().string());
                         List<Author> authors = getListAuthors(json);
                         foundAuthors.setValue(authors);
                     }
-                    catch (JSONException e){
+                    catch (JSONException | IOException e){
                         Log.e("Retrofit", "getAllAuthorsFilter parse error : " + e.getMessage());
                     }
                 }
