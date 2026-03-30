@@ -25,7 +25,7 @@ import retrofit2.Retrofit;
 
 public class Repository {
     private static Repository _instance = null;
-    private static final String API_URL = "http://localhost:3000/";
+    private static final String API_URL = "http://127.0.0.1:3000/";
     private AuthorService authorService;
     private BookService bookService;
     private TagService tagService;

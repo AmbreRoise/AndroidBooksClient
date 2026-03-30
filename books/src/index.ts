@@ -7,7 +7,6 @@ import { HttpError, NotFoundError } from './error';
 import * as author from './requestHandlers/author';
 import * as book from './requestHandlers/book';
 import * as tag from './requestHandlers/tag';
-import * as user from './requestHandlers/user';
 import * as comment from './requestHandlers/comment';
 import * as rating from './requestHandlers/rating';
 
@@ -32,7 +31,6 @@ export const ReqParams = object({
     book_id: optional(refine(string(), 'int', (value) => isInt(value))),
     tag_id: optional(refine(string(), 'int', (value) => isInt(value))),
     comment_id: optional(refine(string(), 'int', (value) => isInt(value))),
-    user_id: optional(refine(string(), 'int', (value) => isInt(value))),
     rating_id: optional(refine(string(), 'int', (value) => isInt(value)))
 });
 
@@ -136,31 +134,23 @@ app.route('/books/:book_id/tags/:tag_id')
     .delete(tag.dissociate_tag_to_book);
 
 // TP4
-app.route('/signup')
-    .post(user.create_one);
-
-app.route('/signin')
-    .post(user.connect_one);
-
 app.route('/books/:book_id/comments')
     .all(validateParams)
     .get(comment.get_all_of_book)
-    .post(user.auth_client, comment.create_one);
+    .post(comment.create_one);
 
 app.route('/comments/:comment_id')
     .all(validateParams)
-    .all(user.auth_client)
     .patch(comment.update_one)
     .delete(comment.delete_one);
 
 app.route('/books/:book_id/ratings')
     .all(validateParams)
     .get(rating.get_all_of_book)
-    .post(user.auth_client, rating.create_one);
+    .post(rating.create_one);
 
 app.route('/ratings/:rating_id')
     .all(validateParams)
-    .all(user.auth_client)
     .patch(rating.update_one)
     .delete(rating.delete_one);
 

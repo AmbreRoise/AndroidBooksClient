@@ -30,13 +30,12 @@ export async function create_one(req: Request, res: Response) {
     assert(req.body, CommentCreationData);
 
     const bookID = Number(req.params.book_id);
-    const userID = (req as any).auth.id;
 
     var comment = await prisma.comment.create({
         data: {
             content: req.body.content,
             bookId: bookID,
-            userId: userID
+            userName: req.body.userName
         }
     });
 
@@ -48,11 +47,9 @@ export async function update_one(req: Request, res: Response) {
 
     try {
         const commentID = Number(req.params.comment_id);
-        const userID = (req as any).auth.id;
         const comment = await prisma.comment.update({
             where: {
                 id: commentID,
-                userId: userID
             },
             data: req.body
         });
@@ -71,11 +68,9 @@ export async function delete_one(req: Request, res: Response) {
     const commentID = Number(req.params.comment_id);
 
     try {
-        const userID = (req as any).auth.id;
         await prisma.comment.delete({
             where: {
                 id: commentID,
-                userId: userID
             }
         });
 

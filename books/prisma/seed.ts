@@ -300,13 +300,13 @@ const authors = [
 ];
 
 
+
 async function main() {
     await prisma.rating.deleteMany();
     await prisma.comment.deleteMany();
     await prisma.book.deleteMany();
     await prisma.author.deleteMany();
     await prisma.tag.deleteMany();
-    await prisma.user.deleteMany();
 
     await prisma.$executeRaw`DELETE FROM sqlite_sequence`;
 
@@ -330,60 +330,48 @@ async function main() {
         }
     }
 
-    const usersData = [
+    const commentsData = [
         {
-            email: "alice@example.com",
-            username: "alice",
-            password: "$2a$10$0G8g7YwFQ9uYp7u1JYbZ8u8p7ZxYwFQ9uYp7u1JYbZ8u8p7ZxYwFq",
-            comments: {
-                create: [
-                    { content: "Un livre incroyable, j'ai adoré !", bookId: bookMap["1984"]! },
-                    { content: "Très intéressant mais un peu long.", bookId: bookMap["Foundation"]! }
-                ]
-            },
-            ratings: {
-                create: [
-                    { value: 5, bookId: bookMap["1984"]! },
-                    { value: 4, bookId: bookMap["Foundation"]! }
-                ]
-            }
+            content: "Un livre incroyable, j'ai adoré !", bookId: bookMap["1984"]!, userName: "Alice"
         },
         {
-            email: "bob@example.com",
-            username: "bobby",
-            password: "$2a$10$7YbZ8u8p7ZxYwFQ9uYp7u1JYbZ8u8p7ZxYwFQ9uYp7u1JYbZ8u8p7",
-            comments: {
-                create: [
-                    { content: "Pas mon style, mais bien écrit.", bookId: bookMap["Journey to the Center of the Earth"]! }
-                ]
-            },
-            ratings: {
-                create: [
-                    { value: 3, bookId: bookMap["Journey to the Center of the Earth"]! },
-                    { value: 5, bookId: bookMap["Animal Farm"]! }
-                ]
-            }
+            content: "Très intéressant mais un peu long.", bookId: bookMap["Foundation"]!, userName: "Alice"
         },
         {
-            email: "charlie@example.com",
-            username: "charlie",
-            password: "$2a$10$9uYp7u1JYbZ8u8p7ZxYwFQ9uYp7u1JYbZ8u8p7ZxYwFQ9uYp7u1JY",
-            comments: {
-                create: [
-                    { content: "Chef d'œuvre absolu.", bookId: bookMap["War and Peace"]! }
-                ]
-            },
-            ratings: {
-                create: [
-                    { value: 5, bookId: bookMap["War and Peace"]! },
-                    { value: 4, bookId: bookMap["Do Androids Dream of Electric Sheep?"]! }
-                ]
-            }
+            content: "Pas mon style, mais bien écrit.", bookId: bookMap["Journey to the Center of the Earth"]!, userName: "Bob"
+        },
+        {
+            content: "Chef d'œuvre absolu.", bookId: bookMap["War and Peace"]!, userName: "Charlie"
         }
     ];
 
-    for (const user of usersData) {
-        await prisma.user.create({ data: user });
+    const ratingsData = [
+        {
+            value: 5, bookId: bookMap["1984"]!, userName: "Alice"
+        },
+        {
+            value: 4, bookId: bookMap["Foundation"]!, userName: "Alice"
+        },
+        {
+            value: 3, bookId: bookMap["Journey to the Center of the Earth"]!, userName: "Bob"
+        },
+        {
+            value: 5, bookId: bookMap["Animal Farm"]!, userName: "Bob"
+        },
+        {
+            value: 5, bookId: bookMap["War and Peace"]!, userName: "Charlie"
+        },
+        {
+            value: 4, bookId: bookMap["Do Androids Dream of Electric Sheep?"]!, userName: "Charlie"
+        }
+    ];
+
+    for (const comment of commentsData) {
+        await prisma.comment.create({ data: comment });
+    }
+
+    for (const rating of ratingsData) {
+        await prisma.rating.create({ data: rating });
     }
 }
 

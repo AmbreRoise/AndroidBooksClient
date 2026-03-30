@@ -27,13 +27,12 @@ export async function get_all_of_book(req: Request, res: Response) {
 export async function create_one(req: Request, res: Response) {
     assert(req.body, RatingCreationData);
 
-    const userID = (req as any).auth.id;
     const bookID = Number(req.params.book_id);
 
     const rating = await prisma.rating.create({
         data: {
             value: req.body.value,
-            userId: userID,
+            userName: req.body.userName,
             bookId: bookID
         }
     });
@@ -42,16 +41,16 @@ export async function create_one(req: Request, res: Response) {
 }
 
 export async function update_one(req: Request, res: Response) {
+    console.log(req.body);
+    console.log(typeof req.body.value);
     assert(req.body, RatingUpdateData);
 
     try {
-        const userID = (req as any).auth.id;
         const ratingID = Number(req.params.rating_id);
 
         const rating = await prisma.rating.update({
             where: {
                 id: ratingID,
-                userId: userID
             },
             data: req.body
         });
@@ -70,11 +69,9 @@ export async function delete_one(req: Request, res: Response) {
     const ratingID = Number(req.params.rating_id);
 
     try {
-        const userID = (req as any).auth.id;
         await prisma.rating.delete({
             where: {
                 id: ratingID,
-                userId: userID
             }
         });
 
