@@ -2,12 +2,12 @@ import { prisma } from '../src/db'
 
 const tags = [
     { name: "Fantasy" },
-    { name: "Science-fiction" },
-    { name: "Classique" },
-    { name: "Aventure" },
-    { name: "Horreur" },
-    { name: "Philosophie" },
-    { name: "Drame" }
+    { name: "Science Fiction" },
+    { name: "Classic" },
+    { name: "Adventure" },
+    { name: "Horror" },
+    { name: "Philosophy" },
+    { name: "Drama" }
 ];
 
 
@@ -20,12 +20,12 @@ const authors = [
                 {
                     title: '1984',
                     publication_year: 1949,
-                    tags: { connect: [{ name: "Classique" }, { name: "Philosophie" }] }
+                    tags: { connect: [{ name: "Classic" }, { name: "Philosophy" }] }
                 },
                 {
                     title: 'Animal Farm',
                     publication_year: 1945,
-                    tags: { connect: [{ name: "Classique" }] }
+                    tags: { connect: [{ name: "Classic" }] }
                 }
             ]
         }
@@ -38,12 +38,12 @@ const authors = [
                 {
                     title: 'Frankenstein',
                     publication_year: 1818,
-                    tags: { connect: [{ name: "Classique" }, { name: "Horreur" }] }
+                    tags: { connect: [{ name: "Classic" }, { name: "Horror" }] }
                 },
                 {
                     title: 'The Last Man',
                     publication_year: 1826,
-                    tags: { connect: [{ name: "Science-fiction" }] }
+                    tags: { connect: [{ name: "Science Fiction" }] }
                 }
             ]
         }
@@ -56,17 +56,17 @@ const authors = [
                 {
                     title: 'Foundation',
                     publication_year: 1951,
-                    tags: { connect: [{ name: "Science-fiction" }] }
+                    tags: { connect: [{ name: "Science Fiction" }] }
                 },
                 {
                     title: 'I, Robot',
                     publication_year: 1950,
-                    tags: { connect: [{ name: "Science-fiction" }] }
+                    tags: { connect: [{ name: "Science Fiction" }] }
                 },
                 {
                     title: 'The Caves of Steel',
                     publication_year: 1953,
-                    tags: { connect: [{ name: "Science-fiction" }] }
+                    tags: { connect: [{ name: "Science Fiction" }] }
                 }
             ]
         }
@@ -79,12 +79,12 @@ const authors = [
                 {
                     title: 'Murder on the Orient Express',
                     publication_year: 1934,
-                    tags: { connect: [{ name: "Classique" }, { name: "Drame" }] }
+                    tags: { connect: [{ name: "Classic" }, { name: "Drama" }] }
                 },
                 {
                     title: 'And Then There Were None',
                     publication_year: 1939,
-                    tags: { connect: [{ name: "Classique" }] }
+                    tags: { connect: [{ name: "Classic" }] }
                 }
             ]
         }
@@ -97,17 +97,17 @@ const authors = [
                 {
                     title: 'Twenty Thousand Leagues Under the Sea',
                     publication_year: 1870,
-                    tags: { connect: [{ name: "Aventure" }, { name: "Science-fiction" }] }
+                    tags: { connect: [{ name: "Adventure" }, { name: "Science Fiction" }] }
                 },
                 {
                     title: 'Journey to the Center of the Earth',
                     publication_year: 1864,
-                    tags: { connect: [{ name: "Aventure" }] }
+                    tags: { connect: [{ name: "Adventure" }] }
                 },
                 {
                     title: 'Around the World in Eighty Days',
                     publication_year: 1872,
-                    tags: { connect: [{ name: "Aventure" }] }
+                    tags: { connect: [{ name: "Adventure" }] }
                 }
             ]
         }
@@ -120,12 +120,12 @@ const authors = [
                 {
                     title: '2001: A Space Odyssey',
                     publication_year: 1968,
-                    tags: { connect: [{ name: "Science-fiction" }] }
+                    tags: { connect: [{ name: "Science Fiction" }] }
                 },
                 {
                     title: 'Childhood’s End',
                     publication_year: 1953,
-                    tags: { connect: [{ name: "Science-fiction" }] }
+                    tags: { connect: [{ name: "Science Fiction" }] }
                 }
             ]
         }
@@ -138,12 +138,12 @@ const authors = [
                 {
                     title: 'Do Androids Dream of Electric Sheep?',
                     publication_year: 1968,
-                    tags: { connect: [{ name: "Science-fiction" }] }
+                    tags: { connect: [{ name: "Science Fiction" }] }
                 },
                 {
                     title: 'The Man in the High Castle',
                     publication_year: 1962,
-                    tags: { connect: [{ name: "Science-fiction" }] }
+                    tags: { connect: [{ name: "Science Fiction" }] }
                 }
             ]
         }
@@ -156,12 +156,12 @@ const authors = [
                 {
                     title: 'Fahrenheit 451',
                     publication_year: 1953,
-                    tags: { connect: [{ name: "Science-fiction" }, { name: "Classique" }] }
+                    tags: { connect: [{ name: "Science Fiction" }, { name: "Classic" }] }
                 },
                 {
                     title: 'The Martian Chronicles',
                     publication_year: 1950,
-                    tags: { connect: [{ name: "Science-fiction" }] }
+                    tags: { connect: [{ name: "Science Fiction" }] }
                 }
             ]
         }
@@ -174,12 +174,12 @@ const authors = [
                 {
                     title: 'War and Peace',
                     publication_year: 1869,
-                    tags: { connect: [{ name: "Classique" }, { name: "Drame" }] }
+                    tags: { connect: [{ name: "Classic" }, { name: "Drama" }] }
                 },
                 {
                     title: 'Anna Karenina',
                     publication_year: 1877,
-                    tags: { connect: [{ name: "Classique" }, { name: "Drame" }] }
+                    tags: { connect: [{ name: "Classic" }, { name: "Drama" }] }
                 }
             ]
         }
@@ -192,12 +192,12 @@ const authors = [
                 {
                     title: 'Crime and Punishment',
                     publication_year: 1866,
-                    tags: { connect: [{ name: "Classique" }, { name: "Philosophie" }] }
+                    tags: { connect: [{ name: "Classic" }, { name: "Philosophy" }] }
                 },
                 {
                     title: 'The Brothers Karamazov',
                     publication_year: 1880,
-                    tags: { connect: [{ name: "Classique" }, { name: "Philosophie" }] }
+                    tags: { connect: [{ name: "Classic" }, { name: "Philosophy" }] }
                 }
             ]
         }
@@ -210,12 +210,12 @@ const authors = [
                 {
                     title: 'Moby-Dick',
                     publication_year: 1851,
-                    tags: { connect: [{ name: "Aventure" }, { name: "Classique" }] }
+                    tags: { connect: [{ name: "Adventure" }, { name: "Classic" }] }
                 },
                 {
                     title: 'Billy Budd',
                     publication_year: 1924,
-                    tags: { connect: [{ name: "Classique" }] }
+                    tags: { connect: [{ name: "Classic" }] }
                 }
             ]
         }
@@ -228,12 +228,12 @@ const authors = [
                 {
                     title: 'Mrs Dalloway',
                     publication_year: 1925,
-                    tags: { connect: [{ name: "Classique" }, { name: "Drame" }] }
+                    tags: { connect: [{ name: "Classic" }, { name: "Drama" }] }
                 },
                 {
                     title: 'To the Lighthouse',
                     publication_year: 1927,
-                    tags: { connect: [{ name: "Classique" }] }
+                    tags: { connect: [{ name: "Classic" }] }
                 }
             ]
         }
@@ -246,12 +246,12 @@ const authors = [
                 {
                     title: 'The Metamorphosis',
                     publication_year: 1915,
-                    tags: { connect: [{ name: "Classique" }, { name: "Philosophie" }] }
+                    tags: { connect: [{ name: "Classic" }, { name: "Philosophy" }] }
                 },
                 {
                     title: 'The Trial',
                     publication_year: 1925,
-                    tags: { connect: [{ name: "Classique" }] }
+                    tags: { connect: [{ name: "Classic" }] }
                 }
             ]
         }
@@ -264,12 +264,12 @@ const authors = [
                 {
                     title: 'One Hundred Years of Solitude',
                     publication_year: 1967,
-                    tags: { connect: [{ name: "Classique" }, { name: "Drame" }] }
+                    tags: { connect: [{ name: "Classic" }, { name: "Drama" }] }
                 },
                 {
                     title: 'Love in the Time of Cholera',
                     publication_year: 1985,
-                    tags: { connect: [{ name: "Classique" }, { name: "Drame" }] }
+                    tags: { connect: [{ name: "Classic" }, { name: "Drama" }] }
                 }
             ]
         }
@@ -282,17 +282,240 @@ const authors = [
                 {
                     title: 'Kafka on the Shore',
                     publication_year: 2002,
-                    tags: { connect: [{ name: "Science-fiction" }, { name: "Philosophie" }] }
+                    tags: { connect: [{ name: "Science Fiction" }, { name: "Philosophy" }] }
                 },
                 {
                     title: 'Norwegian Wood',
                     publication_year: 1987,
-                    tags: { connect: [{ name: "Drame" }] }
+                    tags: { connect: [{ name: "Drama" }] }
                 },
                 {
                     title: '1Q84',
                     publication_year: 2009,
-                    tags: { connect: [{ name: "Science-fiction" }] }
+                    tags: { connect: [{ name: "Science Fiction" }] }
+                }
+            ]
+        }
+    },
+
+    /* --- ADDED AUTHORS --- */
+
+    {
+        firstname: 'J.R.R.',
+        lastname: 'Tolkien',
+        books: {
+            create: [
+                {
+                    title: 'The Hobbit',
+                    publication_year: 1937,
+                    tags: { connect: [{ name: "Fantasy" }, { name: "Adventure" }] }
+                },
+                {
+                    title: 'The Lord of the Rings',
+                    publication_year: 1954,
+                    tags: { connect: [{ name: "Fantasy" }] }
+                }
+            ]
+        }
+    },
+    {
+        firstname: 'C.S.',
+        lastname: 'Lewis',
+        books: {
+            create: [
+                {
+                    title: 'The Chronicles of Narnia',
+                    publication_year: 1950,
+                    tags: { connect: [{ name: "Fantasy" }, { name: "Adventure" }] }
+                }
+            ]
+        }
+    },
+    {
+        firstname: 'H.G.',
+        lastname: 'Wells',
+        books: {
+            create: [
+                {
+                    title: 'The War of the Worlds',
+                    publication_year: 1898,
+                    tags: { connect: [{ name: "Science Fiction" }] }
+                },
+                {
+                    title: 'The Time Machine',
+                    publication_year: 1895,
+                    tags: { connect: [{ name: "Science Fiction" }] }
+                }
+            ]
+        }
+    },
+    {
+        firstname: 'Bram',
+        lastname: 'Stoker',
+        books: {
+            create: [
+                {
+                    title: 'Dracula',
+                    publication_year: 1897,
+                    tags: { connect: [{ name: "Horror" }, { name: "Classic" }] }
+                }
+            ]
+        }
+    },
+    {
+        firstname: 'Aldous',
+        lastname: 'Huxley',
+        books: {
+            create: [
+                {
+                    title: 'Brave New World',
+                    publication_year: 1932,
+                    tags: { connect: [{ name: "Science Fiction" }, { name: "Philosophy" }] }
+                }
+            ]
+        }
+    },
+    {
+        firstname: 'J.D.',
+        lastname: 'Salinger',
+        books: {
+            create: [
+                {
+                    title: 'The Catcher in the Rye',
+                    publication_year: 1951,
+                    tags: { connect: [{ name: "Classic" }, { name: "Drama" }] }
+                }
+            ]
+        }
+    },
+    {
+        firstname: 'H.P.',
+        lastname: 'Lovecraft',
+        books: {
+            create: [
+                {
+                    title: 'The Call of Cthulhu',
+                    publication_year: 1928,
+                    tags: { connect: [{ name: "Horror" }] }
+                }
+            ]
+        }
+    },
+    {
+        firstname: 'Ursula K.',
+        lastname: 'Le Guin',
+        books: {
+            create: [
+                {
+                    title: 'A Wizard of Earthsea',
+                    publication_year: 1968,
+                    tags: { connect: [{ name: "Fantasy" }] }
+                },
+                {
+                    title: 'The Left Hand of Darkness',
+                    publication_year: 1969,
+                    tags: { connect: [{ name: "Science Fiction" }] }
+                }
+            ]
+        }
+    },
+    {
+        firstname: 'Toni',
+        lastname: 'Morrison',
+        books: {
+            create: [
+                {
+                    title: 'Beloved',
+                    publication_year: 1987,
+                    tags: { connect: [{ name: "Drama" }, { name: "Classic" }] }
+                }
+            ]
+        }
+    },
+    {
+        firstname: 'Margaret',
+        lastname: 'Atwood',
+        books: {
+            create: [
+                {
+                    title: 'The Handmaid’s Tale',
+                    publication_year: 1985,
+                    tags: { connect: [{ name: "Science Fiction" }, { name: "Drama" }] }
+                }
+            ]
+        }
+    },
+    {
+        firstname: 'Neil',
+        lastname: 'Gaiman',
+        books: {
+            create: [
+                {
+                    title: 'American Gods',
+                    publication_year: 2001,
+                    tags: { connect: [{ name: "Fantasy" }] }
+                }
+            ]
+        }
+    },
+    {
+        firstname: 'Stephen',
+        lastname: 'King',
+        books: {
+            create: [
+                {
+                    title: 'The Shining',
+                    publication_year: 1977,
+                    tags: { connect: [{ name: "Horror" }] }
+                },
+                {
+                    title: 'It',
+                    publication_year: 1986,
+                    tags: { connect: [{ name: "Horror" }] }
+                }
+            ]
+        }
+    },
+    {
+        firstname: 'J.K.',
+        lastname: 'Rowling',
+        books: {
+            create: [
+                {
+                    title: 'Harry Potter and the Philosopher’s Stone',
+                    publication_year: 1997,
+                    tags: { connect: [{ name: "Fantasy" }] }
+                }
+            ]
+        }
+    },
+    {
+        firstname: 'Alexandre',
+        lastname: 'Dumas',
+        books: {
+            create: [
+                {
+                    title: 'The Count of Monte Cristo',
+                    publication_year: 1844,
+                    tags: { connect: [{ name: "Adventure" }, { name: "Classic" }] }
+                },
+                {
+                    title: 'The Three Musketeers',
+                    publication_year: 1844,
+                    tags: { connect: [{ name: "Adventure" }] }
+                }
+            ]
+        }
+    },
+    {
+        firstname: 'Homer',
+        lastname: '',
+        books: {
+            create: [
+                {
+                    title: 'The Odyssey',
+                    publication_year: -700,
+                    tags: { connect: [{ name: "Adventure" }, { name: "Classic" }] }
                 }
             ]
         }
