@@ -42,6 +42,18 @@ public class BookViewModel extends ViewModel {
         _repository.deleteBook(bookID);
     }
 
+    public void updateBook(String bookID, String title, Integer publicationYear) {
+        _repository.updateBook(_book, bookID, title, publicationYear);
+    }
+
+    public void associateTag(String bookID, String tagID) {
+        _repository.associateTagToBook(_book, _book.getValue(), bookID, tagID);
+    }
+
+    public void dissociateTag(String bookID, String tagID) {
+        _repository.dissociateTagToBook(_book, _book.getValue(), bookID, tagID);
+    }
+
     public LiveData<List<Book>> getBooks() {
         return _books;
     }

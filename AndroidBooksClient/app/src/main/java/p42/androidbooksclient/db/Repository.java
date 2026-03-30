@@ -430,17 +430,17 @@ public class Repository {
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if(response.isSuccessful()){
                     try{
-                        JSONObject json = new JSONObject(response.body().toString());
+                        JSONObject json = new JSONObject(response.body().string());
                         Book book = new Book(
                                 json.getInt("id"),
                                 json.getString("title"),
-                                json.getInt("publication_year"),
+                                json.isNull("publication_year") ? null : json.getInt("publication_year"),
                                 json.getInt("authorId")
                         );
 
                         updatedBook.setValue(book);
                     }
-                    catch(JSONException e){
+                    catch(JSONException | IOException e){
                         Log.e("Retrofit", "updateBook parse error : " + e.getMessage());
                     }
                 }
@@ -520,7 +520,7 @@ public class Repository {
         });
     }
 
-    private void associateTagToBook(MutableLiveData<Book> associatedBook, Book book, String bookID, String tagID){
+    public void associateTagToBook(MutableLiveData<Book> associatedBook, Book book, String bookID, String tagID){
         tagService.associateTagToBook(bookID, tagID).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -561,7 +561,7 @@ public class Repository {
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if(response.isSuccessful()){
                     try{
-                        JSONObject json = new JSONObject(response.body().toString());
+                        JSONObject json = new JSONObject(response.body().string());
                         JSONArray tagsJson = json.getJSONArray("tags");
                         List<Tag> tags = new ArrayList<>();
                         for(int i=0; i<tagsJson.length(); i++){
@@ -574,7 +574,7 @@ public class Repository {
                         book.setTags(tags);
                         dissociatedBook.setValue(book);
                     }
-                    catch(JSONException e){
+                    catch(JSONException | IOException e){
                         Log.e("Retrofit", "dissociateTagToBook parse error" + e.getMessage());
                     }
                 }

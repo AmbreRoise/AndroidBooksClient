@@ -39,10 +39,18 @@
         android:text="@string/BDTags" />
 
     <Button
+        android:id="@+id/editBookButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/BDEdit_the_bookButton"
+        android:layout_marginBottom="8dp"/>
+
+    <Button
         android:id="@+id/deleteBookButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/BDRemoveBook" />
+
 
 
 </LinearLayout>

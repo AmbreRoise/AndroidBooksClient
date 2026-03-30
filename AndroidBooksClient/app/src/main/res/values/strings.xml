@@ -26,4 +26,11 @@
     <string name="BLFilterButton">Filter</string>
     <string name="ALfilter_by_lastname">Filter by lastname</string>
     <string name="ALFilterButton">Filter</string>
+    <string name="BDEdit_the_bookButton">Edit the book</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="BEtitle">Title</string>
+    <string name="BEpublication_year">Publication year</string>
+    <string name="BEtags">Tags</string>
+    <string name="BEconfirmButton">Confirm</string>
 </resources>

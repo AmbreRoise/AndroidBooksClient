@@ -37,6 +37,12 @@ public class BookDescription extends Fragment {
             Navigation.findNavController(view).navigateUp();
         });
 
+        view.findViewById(R.id.editBookButton).setOnClickListener(v -> {
+            Bundle bundle = new Bundle();
+            bundle.putInt("bookId", bookId);
+            Navigation.findNavController(view).navigate(R.id.action_bookDescription_to_bookEdit, bundle);
+        });
+
         bookViewModel.getBook().observe(getViewLifecycleOwner(), book -> {
             if(book != null){
                 ((TextView) view.findViewById(R.id.bookTitle)).setText(book.getTitle());
