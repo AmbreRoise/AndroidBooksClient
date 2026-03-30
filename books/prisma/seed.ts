@@ -7,7 +7,8 @@ const tags = [
     { name: "Adventure" },
     { name: "Horror" },
     { name: "Philosophy" },
-    { name: "Drama" }
+    { name: "Drama" },
+    { name: "Poetry" }
 ];
 
 
@@ -297,9 +298,6 @@ const authors = [
             ]
         }
     },
-
-    /* --- ADDED AUTHORS --- */
-
     {
         firstname: 'J.R.R.',
         lastname: 'Tolkien',
@@ -508,14 +506,14 @@ const authors = [
         }
     },
     {
-        firstname: 'Homer',
-        lastname: '',
+        firstname: 'Emily',
+        lastname: 'Dickinson',
         books: {
             create: [
                 {
-                    title: 'The Odyssey',
-                    publication_year: -700,
-                    tags: { connect: [{ name: "Adventure" }, { name: "Classic" }] }
+                    title: 'The complete poems',
+                    publication_year: 1955,
+                    tags: { connect: [{ name: "Classic" }, { name: "Poetry" }] }
                 }
             ]
         }
