@@ -33,4 +33,5 @@
     <string name="BEpublication_year">Publication year</string>
     <string name="BEtags">Tags</string>
     <string name="BEconfirmButton">Confirm</string>
+    <string name="BDChoisir_une_couverture_Button">Choisir une couverture</string>
 </resources>
