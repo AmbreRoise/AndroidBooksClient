@@ -2,6 +2,7 @@ package p42.androidbooksclient.view.Author;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -11,6 +12,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.json.JSONArray;
+
+import java.util.ArrayList;
 
 import p42.androidbooksclient.R;
 import p42.androidbooksclient.model.Author;
@@ -35,11 +38,22 @@ public class AuthorList extends Fragment implements AuthorListAdapter.OnNoteList
         RecyclerView recycler = view.findViewById(R.id.authorList);
         recycler.setLayoutManager(new LinearLayoutManager(getContext()));
 
+        AuthorListAdapter adapter = new AuthorListAdapter(new ArrayList<>(), this);
+        recycler.setAdapter(adapter);
 
         authorData.fetchAllAuthors();
+
+        view.findViewById(R.id.BLConfirmFilter).setOnClickListener(v -> {
+            String filter = ((EditText) view.findViewById(R.id.searchBookName)).getText().toString().trim();
+            if(filter.isEmpty()){
+                authorData.fetchAllAuthors();
+            } else {
+                authorData.fetchAllAuthorsFilter(filter);
+            }
+        });
+
         authorData.getAuthors().observe(getViewLifecycleOwner(), data -> {
-            AuthorListAdapter adapter = new AuthorListAdapter(data, this);
-            recycler.setAdapter(adapter);
+            adapter.updateData(data);
         });
 
     }

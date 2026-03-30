@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.Book.BookCreate">
+    tools:context=".view.Book.BookEdit">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -12,69 +12,40 @@
         android:padding="16dp">
 
         <EditText
-            android:id="@+id/inputTitle"
+            android:id="@+id/editTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/BCTitle"
+            android:hint="@string/BEtitle"
             android:layout_marginBottom="12dp"
             android:inputType="text" />
 
         <EditText
-            android:id="@+id/inputYear"
+            android:id="@+id/editYear"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/BCYear"
+            android:hint="@string/BEpublication_year"
             android:layout_marginBottom="12dp"
             android:inputType="number" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/BCAuteur"
+            android:text="@string/BEtags"
             android:textStyle="bold"
             android:layout_marginBottom="4dp" />
 
-        <Spinner
-            android:id="@+id/spinnerAuthor"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp" />
-
-
-
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
-
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/BCTags"
-                android:textStyle="bold"
-                android:layout_marginBottom="4dp"
-                android:layout_marginEnd="10dp"/>
-
-            <Button
-                android:id="@+id/createTag"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/BCcreatetag"/>
-
-        </LinearLayout>
-        <LinearLayout
-            android:id="@+id/tagsContainer"
+            android:id="@+id/editTagsContainer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_marginBottom="24dp" />
 
         <Button
-            android:id="@+id/confirmCreateBook"
+            android:id="@+id/confirmEditBook"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/BCCreateButton" />
+            android:text="@string/BEconfirmButton" />
 
     </LinearLayout>
 </ScrollView>

@@ -33,7 +33,11 @@
         android:id="@+id/bookDescription"
         android:name="p42.androidbooksclient.view.Book.BookDescription"
         android:label="fragment_book_description"
-        tools:layout="@layout/fragment_book_description" />
+        tools:layout="@layout/fragment_book_description" >
+        <action
+            android:id="@+id/action_bookDescription_to_bookEdit"
+            app:destination="@id/bookEdit" />
+    </fragment>
     <fragment
         android:id="@+id/authorDescription"
         android:name="p42.androidbooksclient.view.Author.AuthorDescription"
@@ -47,10 +51,24 @@
         android:id="@+id/bookCreate"
         android:name="p42.androidbooksclient.view.Book.BookCreate"
         android:label="fragment_book_create"
-        tools:layout="@layout/fragment_book_create" />
+        tools:layout="@layout/fragment_book_create" >
+        <action
+            android:id="@+id/action_bookCreate_to_tagCreate"
+            app:destination="@id/tagCreate" />
+    </fragment>
     <fragment
         android:id="@+id/authorCreate"
         android:name="p42.androidbooksclient.view.Author.AuthorCreate"
         android:label="fragment_author_create"
         tools:layout="@layout/fragment_author_create" />
+    <fragment
+        android:id="@+id/tagCreate"
+        android:name="p42.androidbooksclient.view.Book.TagCreate"
+        android:label="fragment_tag_create"
+        tools:layout="@layout/fragment_tag_create" />
+    <fragment
+        android:id="@+id/bookEdit"
+        android:name="p42.androidbooksclient.view.Book.BookEdit"
+        android:label="fragment_book_edit"
+        tools:layout="@layout/fragment_book_edit" />
 </navigation>

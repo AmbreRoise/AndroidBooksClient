@@ -16,13 +16,16 @@ public class BookViewModel extends ViewModel {
     private MutableLiveData<Book> _book = new MutableLiveData<>();
 
     public BookViewModel() {
-        _repository = new Repository();
+        _repository = Repository.getInstance();
     }
 
     public void fetchAllBooks() {
         _repository.getAllBooks(_books);
     }
 
+    public void fetchAllBooksFilter(String filter) {
+        _repository.getAllBooksFilter(_books, filter);
+    }
     public void fetchOneBook(String bookID) {
         _repository.getOneBook(_book, bookID);
     }
@@ -37,6 +40,18 @@ public class BookViewModel extends ViewModel {
 
     public void deleteBook(String bookID) {
         _repository.deleteBook(bookID);
+    }
+
+    public void updateBook(String bookID, String title, Integer publicationYear) {
+        _repository.updateBook(_book, bookID, title, publicationYear);
+    }
+
+    public void associateTag(String bookID, String tagID) {
+        _repository.associateTagToBook(_book, _book.getValue(), bookID, tagID);
+    }
+
+    public void dissociateTag(String bookID, String tagID) {
+        _repository.dissociateTagToBook(_book, _book.getValue(), bookID, tagID);
     }
 
     public LiveData<List<Book>> getBooks() {
