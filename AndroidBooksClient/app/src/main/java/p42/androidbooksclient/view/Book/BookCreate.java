@@ -97,12 +97,12 @@ public class BookCreate extends Fragment {
             yearInput.setError(null);
 
             if(title.isEmpty()){
-                titleInput.setError("Le titre est obligatoire");
+                titleInput.setError("Title is required");
                 return;
             }
 
             if(_authorList.isEmpty()){
-                Toast.makeText(requireContext(), "Aucun auteur disponible", Toast.LENGTH_SHORT).show();
+                Toast.makeText(requireContext(), "No authors available", Toast.LENGTH_SHORT).show();
                 return;
             }
 
@@ -111,7 +111,7 @@ public class BookCreate extends Fragment {
                 try {
                     year = Integer.parseInt(yearStr);
                 } catch(NumberFormatException e){
-                    yearInput.setError("L'année doit être un nombre valide");
+                    yearInput.setError("The publication year must be a valid number");
                     return;
                 }
             }

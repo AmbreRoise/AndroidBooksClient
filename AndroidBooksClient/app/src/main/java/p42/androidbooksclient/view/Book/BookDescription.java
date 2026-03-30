@@ -103,9 +103,9 @@ public class BookDescription extends Fragment {
             if(book != null){
                 ((TextView) view.findViewById(R.id.bookTitle)).setText(book.getTitle());
                 ((TextView) view.findViewById(R.id.bookYear)).setText(
-                        "Année de publication : " + (book.getPublicationYear() != null
+                        "Year of publication : " + (book.getPublicationYear() != null
                                 ? String.valueOf(book.getPublicationYear())
-                                : "Année inconnue")
+                                : "Unknown year")
                 );
                 if(book.getTags() != null && !book.getTags().isEmpty()){
                     StringBuilder tags = new StringBuilder("Tags : ");
@@ -115,7 +115,7 @@ public class BookDescription extends Fragment {
                     tags.setLength(tags.length() - 2);
                     ((TextView) view.findViewById(R.id.bookTags)).setText(tags.toString());
                 } else {
-                    ((TextView) view.findViewById(R.id.bookTags)).setText("Aucun tag");
+                    ((TextView) view.findViewById(R.id.bookTags)).setText("No tags");
                 }
 
 
@@ -126,7 +126,7 @@ public class BookDescription extends Fragment {
         authorViewModel.getAuthor().observe(getViewLifecycleOwner(), author -> {
             if(author != null){
                 ((TextView) view.findViewById(R.id.bookAuthor)).setText(
-                        "Auteur : " + author.getFirstname() + " " + author.getLastname()
+                        "Author : " + author.getFirstname() + " " + author.getLastname()
                 );
             }
         });

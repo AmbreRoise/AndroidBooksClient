@@ -41,12 +41,12 @@ public class AuthorCreate extends Fragment {
             lastnameInput.setError(null);
 
             if(firstname.isEmpty()){
-                firstnameInput.setError("Le prénom est obligatoire");
+                firstnameInput.setError("Firstname is required");
                 return;
             }
 
             if(lastname.isEmpty()){
-                lastnameInput.setError("Le nom est obligatoire");
+                lastnameInput.setError("Lastname is required");
                 return;
             }
 
