@@ -50,7 +50,7 @@ public class AuthorDescription extends Fragment implements BookListAdapter.OnNot
         bookViewModel.fetchBooksOfAuthor(String.valueOf(authorId));
         bookViewModel.getBooks().observe(getViewLifecycleOwner(), books -> {
             if (books != null) {
-                BookListAdapter adapter = new BookListAdapter(books, this,R.id.action_authorDescription_to_bookDescription);
+                BookListAdapter adapter = new BookListAdapter(books, this);
                 recycler.setAdapter(adapter);
             }
         });

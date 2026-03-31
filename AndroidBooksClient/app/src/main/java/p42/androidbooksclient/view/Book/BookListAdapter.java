@@ -18,13 +18,10 @@ import p42.androidbooksclient.model.Book;
 public class BookListAdapter extends RecyclerView.Adapter<BookListViewHolder> {
     private List<Book> _books;
     private final OnNoteListener _onNoteListener;
-    private final int _navigationAction;
 
-
-    public BookListAdapter(List<Book> data, OnNoteListener onNoteListener, int navigationAction){
+    public BookListAdapter(List<Book> data, OnNoteListener onNoteListener){
         _books = data;
         _onNoteListener = onNoteListener;
-        _navigationAction = navigationAction;
     }
 
     @NonNull
@@ -32,7 +29,7 @@ public class BookListAdapter extends RecyclerView.Adapter<BookListViewHolder> {
     public  BookListViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType){
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.booklist_view_holder, parent, false);
-        return new BookListViewHolder(view, this._onNoteListener, this._navigationAction);
+        return new BookListViewHolder(view, this._onNoteListener);
     }
 
     @Override

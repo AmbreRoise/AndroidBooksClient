@@ -38,7 +38,7 @@ public class BookList extends Fragment implements BookListAdapter.OnNoteListener
         RecyclerView recycler = view.findViewById(R.id.bookList);
         recycler.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        BookListAdapter adapter = new BookListAdapter(new ArrayList<>(),this, R.id.action_bookList_to_bookDescription);
+        BookListAdapter adapter = new BookListAdapter(new ArrayList<>(),this);
         recycler.setAdapter(adapter);
 
         bookData.fetchAllBooks();

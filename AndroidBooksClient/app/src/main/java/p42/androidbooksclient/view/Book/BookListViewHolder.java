@@ -16,16 +16,15 @@ import p42.androidbooksclient.R;
 public class BookListViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
     private  final TextView textView;
     private int _bookId;
-    private final int _navigationAction;
     BookListAdapter.OnNoteListener onNoteListener;
 
-    public BookListViewHolder(@NonNull View itemView, BookListAdapter.OnNoteListener onNoteListener, int navigationAction){
+    public BookListViewHolder(@NonNull View itemView, BookListAdapter.OnNoteListener onNoteListener){
         super(itemView);
         textView = itemView.findViewById(R.id.BookName);
         itemView.setOnClickListener(this);
         this.onNoteListener = onNoteListener;
-        this._navigationAction = navigationAction;
     }
+
     @Override
     public void onClick(View v){
         this.onNoteListener.onNoteClick(_bookId);
