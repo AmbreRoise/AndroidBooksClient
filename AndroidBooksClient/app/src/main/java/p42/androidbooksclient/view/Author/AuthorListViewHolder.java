@@ -26,9 +26,6 @@ public class AuthorListViewHolder extends RecyclerView.ViewHolder implements Vie
     @Override
     public void onClick(View v){
         this.onNoteListener.onNoteClick(_authorId);
-        Bundle bundle = new Bundle();
-        bundle.putInt("authorId", _authorId);
-        Navigation.findNavController(v).navigate(R.id.action_authorList_to_authorDescription, bundle);
     }
 
     public void setAuthorName(String firstname, String lastname){

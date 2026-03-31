@@ -29,9 +29,6 @@ public class BookListViewHolder extends RecyclerView.ViewHolder implements View.
     @Override
     public void onClick(View v){
         this.onNoteListener.onNoteClick(_bookId);
-        Bundle bundle = new Bundle();
-        bundle.putInt("bookId",_bookId);
-        Navigation.findNavController(v).navigate(_navigationAction,bundle);
     }
 
     public void setBookName( String name){

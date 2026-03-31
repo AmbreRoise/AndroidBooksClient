@@ -58,6 +58,9 @@ public class AuthorList extends Fragment implements AuthorListAdapter.OnNoteList
 
     }
     public void onNoteClick(int authorId){
+        Bundle bundle = new Bundle();
+        bundle.putInt("authorId", authorId);
+        Navigation.findNavController(getView()).navigate(R.id.action_authorList_to_authorDescription, bundle);
     }
 
 }

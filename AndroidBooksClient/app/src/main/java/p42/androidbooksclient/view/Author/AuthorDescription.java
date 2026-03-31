@@ -57,6 +57,10 @@ public class AuthorDescription extends Fragment implements BookListAdapter.OnNot
     }
 
     @Override
-    public void onNoteClick(int bookId) {}
+    public void onNoteClick(int bookId) {
+        Bundle bundle = new Bundle();
+        bundle.putInt("bookId",bookId);
+        Navigation.findNavController(getView()).navigate(R.id.action_authorDescription_to_bookDescription,bundle);
+    }
 
 }

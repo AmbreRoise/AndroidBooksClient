@@ -59,5 +59,8 @@ public class BookList extends Fragment implements BookListAdapter.OnNoteListener
 
     }
     public void onNoteClick(int bookId){
+        Bundle bundle = new Bundle();
+        bundle.putInt("bookId",bookId);
+        Navigation.findNavController(getView()).navigate(R.id.action_bookList_to_bookDescription,bundle);
     }
 }
