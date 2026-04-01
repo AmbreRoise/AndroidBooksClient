@@ -42,7 +42,7 @@ Fragment → ViewModel → Repository → Service Retrofit → API
 - Les **Fragments** observent ces `LiveData` et mettent à jour l'UI en conséquence. Ils n'ont aucune connaissance de Retrofit ni du Repository.
 
 
-**Remarque :** Nous avons choisi de ne faire qu'un Repository afin de ne pas surcharger l'API de connexion au détriment de la longueur du fichier `Repository.java`.
+**Remarque :** Nous avons choisi de ne faire qu'un Repository afin de ne pas surcharger l'API de connexion au détriment de la longueur du fichier `Repository.java`. Afin de ne pas créer trois instances du Repository dans chacun des ViewModel (ce qui aurait eu pour effet de surcharger l'API et de gâcher notre logique), nous avons fait du Repository un singleton pour qu'il n'y ait qu'une seule instance. Ainsi, les ViewModel récupèrent l'instance courante pour effectuer les requêtes.
 
 ---
 
@@ -54,7 +54,7 @@ Toutes les **fonctionnalités de base** ont été **implémentées** à savoir :
 - créer/supprimer un livre
 - créer/supprimer un auteur
 
-Nous n'avons cependant pas implémenté l'idée de la couverture pour un livre.
+Nous avons également implémenté l'idée de la couverture pour un livre qui est géré en local et non grâce à une API.
 
 ### Rajouts
 
