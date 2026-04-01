@@ -1,9 +1,27 @@
 # Mode d'emploi API
 
-Afin de lancer notre API, allez dans le dossier `books` :  
+Notre API se trouve dans le dossier `books` :  
 
 ```bash
 cd books/
+```
+
+Une fois dans le dossier `books` il vous faudra créer votre propre fichier `.env` :  
+
+```bash
+cp .env.example .env
+```
+
+Il vous faudra ensuite installer les dépendances afin de faire fonctionner l'API :  
+
+```bash
+bun install
+```
+
+Une fois ces dépendances installées, vous devez générer le schéma Prisma :  
+
+```bash
+bunx prisma generate
 ```
 
 Exécutez ensuite la commande suivante afin de démarrer l'API :  

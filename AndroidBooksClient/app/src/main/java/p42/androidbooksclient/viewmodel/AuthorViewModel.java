@@ -16,11 +16,15 @@ public class AuthorViewModel extends ViewModel {
     private MutableLiveData<Author> _author = new MutableLiveData<>();
 
     public AuthorViewModel() {
-        _repository = new Repository();
+        _repository = Repository.getInstance();
     }
 
     public void fetchAllAuthors() {
         _repository.getAllAuthors(_authors);
+    }
+
+    public void fetchAllAuthorsFilter(String filter) {
+        _repository.getAllAuthorsFilter(_authors, filter);
     }
 
     public void fetchOneAuthor(String authorID) {

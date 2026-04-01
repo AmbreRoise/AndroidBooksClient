@@ -24,13 +24,14 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 
 public class Repository {
-    private static final String API_URL = "http://localhost:3000/";
+    private static Repository _instance = null;
+    private static final String API_URL = "http://127.0.0.1:3000/";
     private AuthorService authorService;
     private BookService bookService;
     private TagService tagService;
     private Retrofit retrofit;
 
-    public Repository(){
+    private Repository(){
         retrofit = new Retrofit.Builder()
                 .baseUrl(API_URL)
                 .build();
@@ -38,6 +39,13 @@ public class Repository {
         authorService = retrofit.create(AuthorService.class);
         bookService = retrofit.create(BookService.class);
         tagService = retrofit.create(TagService.class);
+    }
+
+    public static Repository getInstance() {
+        if(_instance == null){
+            _instance = new Repository();
+        }
+        return _instance;
     }
 
     // ================== AUTHORS ======================
@@ -72,11 +80,11 @@ public class Repository {
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if(response.isSuccessful()){
                     try{
-                        JSONArray json = new JSONArray(response.body().toString());
+                        JSONArray json = new JSONArray(response.body().string());
                         List<Author> authors = getListAuthors(json);
                         foundAuthors.setValue(authors);
                     }
-                    catch (JSONException e){
+                    catch (JSONException | IOException e){
                         Log.e("Retrofit", "getAllAuthorsFilter parse error : " + e.getMessage());
                     }
                 }
@@ -422,17 +430,17 @@ public class Repository {
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if(response.isSuccessful()){
                     try{
-                        JSONObject json = new JSONObject(response.body().toString());
+                        JSONObject json = new JSONObject(response.body().string());
                         Book book = new Book(
                                 json.getInt("id"),
                                 json.getString("title"),
-                                json.getInt("publication_year"),
+                                json.isNull("publication_year") ? null : json.getInt("publication_year"),
                                 json.getInt("authorId")
                         );
 
                         updatedBook.setValue(book);
                     }
-                    catch(JSONException e){
+                    catch(JSONException | IOException e){
                         Log.e("Retrofit", "updateBook parse error : " + e.getMessage());
                     }
                 }
@@ -512,7 +520,7 @@ public class Repository {
         });
     }
 
-    private void associateTagToBook(MutableLiveData<Book> associatedBook, Book book, String bookID, String tagID){
+    public void associateTagToBook(MutableLiveData<Book> associatedBook, Book book, String bookID, String tagID){
         tagService.associateTagToBook(bookID, tagID).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -553,7 +561,7 @@ public class Repository {
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if(response.isSuccessful()){
                     try{
-                        JSONObject json = new JSONObject(response.body().toString());
+                        JSONObject json = new JSONObject(response.body().string());
                         JSONArray tagsJson = json.getJSONArray("tags");
                         List<Tag> tags = new ArrayList<>();
                         for(int i=0; i<tagsJson.length(); i++){
@@ -566,7 +574,7 @@ public class Repository {
                         book.setTags(tags);
                         dissociatedBook.setValue(book);
                     }
-                    catch(JSONException e){
+                    catch(JSONException | IOException e){
                         Log.e("Retrofit", "dissociateTagToBook parse error" + e.getMessage());
                     }
                 }
@@ -600,7 +608,7 @@ public class Repository {
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if(response.isSuccessful()){
                     try{
-                        JSONObject json = new JSONObject(response.body().toString());
+                        JSONObject json = new JSONObject(response.body().string());
                         Tag tag = new Tag(
                                 json.getInt("id"),
                                 json.getString("name")
@@ -608,7 +616,7 @@ public class Repository {
 
                         createdTag.setValue(tag);
                     }
-                    catch(JSONException e){
+                    catch(JSONException | IOException e){
                         Log.e("Retrofit", "createTag parse error" + e.getMessage());
                     }
                 }

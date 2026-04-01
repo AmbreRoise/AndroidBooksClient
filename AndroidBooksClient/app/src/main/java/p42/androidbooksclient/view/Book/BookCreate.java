@@ -44,6 +44,10 @@ public class BookCreate extends Fragment {
         Spinner spinnerAuthor = view.findViewById(R.id.spinnerAuthor);
         LinearLayout tagsContainer = view.findViewById(R.id.tagsContainer);
 
+        view.findViewById(R.id.createTag).setOnClickListener(v -> {
+            Navigation.findNavController(view).navigate(R.id.action_bookCreate_to_tagCreate);
+        });
+
         authorViewModel.fetchAllAuthors();
         authorViewModel.getAuthors().observe(getViewLifecycleOwner(), authors -> {
             if(authors != null){
@@ -93,12 +97,12 @@ public class BookCreate extends Fragment {
             yearInput.setError(null);
 
             if(title.isEmpty()){
-                titleInput.setError("Le titre est obligatoire");
+                titleInput.setError("Title is required");
                 return;
             }
 
             if(_authorList.isEmpty()){
-                Toast.makeText(requireContext(), "Aucun auteur disponible", Toast.LENGTH_SHORT).show();
+                Toast.makeText(requireContext(), "No authors available", Toast.LENGTH_SHORT).show();
                 return;
             }
 
@@ -107,7 +111,7 @@ public class BookCreate extends Fragment {
                 try {
                     year = Integer.parseInt(yearStr);
                 } catch(NumberFormatException e){
-                    yearInput.setError("L'année doit être un nombre valide");
+                    yearInput.setError("The publication year must be a valid number");
                     return;
                 }
             }

@@ -1,9 +1,11 @@
-import { object, string, size, optional, enums, integer } from 'superstruct';
+import { object, string, optional, number } from 'superstruct';
 
 export const RatingCreationData = object({
-    value: integer()
+    value: number(),
+    userName: string()
 });
 
 export const RatingUpdateData = object({
-    value: integer()
+    value: optional(number()),
+    userName: optional(string())
 });

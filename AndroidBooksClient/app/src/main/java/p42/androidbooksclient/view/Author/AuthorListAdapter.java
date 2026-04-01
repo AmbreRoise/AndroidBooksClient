@@ -14,10 +14,11 @@ import java.util.List;
 
 import p42.androidbooksclient.R;
 import p42.androidbooksclient.model.Author;
+import p42.androidbooksclient.model.Book;
 import p42.androidbooksclient.view.Book.BookListAdapter;
 
 public class AuthorListAdapter extends RecyclerView.Adapter<AuthorListViewHolder> {
-    private final List<Author> _authors;
+    private List<Author> _authors;
     private final OnNoteListener _onNoteListener;
 
     public AuthorListAdapter(List<Author> data, OnNoteListener onNoteListener){
@@ -47,5 +48,11 @@ public class AuthorListAdapter extends RecyclerView.Adapter<AuthorListViewHolder
 
     public interface OnNoteListener{
         void onNoteClick(int authorId);
+    }
+
+    public void updateData(List<Author> newAuthor){
+        _authors.clear();
+        _authors.addAll(newAuthor);
+        notifyDataSetChanged();
     }
 }
